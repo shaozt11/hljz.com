@@ -1,537 +1,104 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>首页 - 蔚澜开发者生态</title>
-    <style>
-      :root {
-        --bg0: #121212;
-        --card: #1a1a1a;
-        --stroke: #333333;
-        --text: #ffffff;
-        --muted: #999999;
-        --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
-        --radius-pill: 9999px;
-        --radius-card: 20px;
-        --accent: #ff8c00;
-        --maxw: 1100px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        margin: 0;
-        color: var(--text);
-        font-family: Inter, Roboto, ui-sans-serif, system-ui, -apple-system,
-          Segoe UI, "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans CJK SC",
-          "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, "Noto Sans",
-          sans-serif;
-        background: var(--bg0);
-        overflow-x: hidden;
-      }
-
-      body::before,
-      body::after {
-        content: "";
-        position: fixed;
-        pointer-events: none;
-        width: 560px;
-        height: 560px;
-        border-radius: 50%;
-        background: rgba(255, 140, 0, 0.14);
-        filter: blur(90px);
-        opacity: 0.9;
-      }
-      body::before {
-        top: -240px;
-        left: -220px;
-      }
-      body::after {
-        top: -260px;
-        right: -240px;
-        opacity: 0.6;
-      }
-
-      .wrap {
-        max-width: var(--maxw);
-        margin: 0 auto;
-        padding: 110px 20px 60px;
-        position: relative;
-        z-index: 2;
-      }
-
-      .nav {
-        position: fixed;
-        top: 18px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(calc(100% - 40px), var(--maxw));
-        height: 58px;
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: 14px;
-        padding: 10px 14px;
-        border-radius: var(--radius-pill);
-        background: var(--card);
-        border: 1px solid var(--stroke);
-        box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
-        z-index: 50;
-      }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        min-width: 0;
-      }
-      .brand-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 0 6px rgba(255, 140, 0, 0.12);
-        flex: 0 0 auto;
-      }
-      .brand-title {
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .nav-links {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        line-height: 1;
-        padding: 2px;
-        border-radius: var(--radius-pill);
-        background: var(--bg0);
-        border: 1px solid var(--stroke);
-        min-width: 260px;
-      }
-      .nav-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 34px;
-        padding: 0 12px;
-        border-radius: var(--radius-pill);
-        text-decoration: none;
-        font-weight: 800;
-        font-size: 13px;
-        color: var(--muted);
-        border: 1px solid transparent;
-        transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
-        user-select: none;
-        white-space: nowrap;
-      }
-      .nav-link:hover {
-        color: var(--text);
-        background: rgba(255, 140, 0, 0.1);
-      }
-      .nav-link[aria-current="page"] {
-        color: var(--text);
-        background: rgba(255, 140, 0, 0.16);
-        border-color: rgba(255, 140, 0, 0.35);
-      }
-
-      .home-waves {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 1;
-        overflow: hidden;
-        opacity: 0.9;
-      }
-      .home-waves .wave {
-        position: absolute;
-        left: -10%;
-        width: 120%;
-        height: 320px;
-        top: 52%;
-        background-repeat: repeat-x;
-        background-size: 1200px 320px;
-        mix-blend-mode: screen;
-        will-change: transform, background-position;
-      }
-      .home-waves .wave1 {
-        opacity: 0.35;
-        filter: blur(0.2px);
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='320' viewBox='0 0 1200 320'%3E%3Cpath d='M0 160 C150 120 250 200 400 160 C550 120 650 200 800 160 C950 120 1050 200 1200 160' stroke='%23ff8c00' stroke-width='3' fill='none' opacity='0.55'/%3E%3Cpath d='M0 205 C150 165 250 245 400 205 C550 165 650 245 800 205 C950 165 1050 245 1200 205' stroke='%23ff8c00' stroke-width='2' fill='none' opacity='0.28'/%3E%3Cpath d='M0 115 C150 75 250 155 400 115 C550 75 650 155 800 115 C950 75 1050 155 1200 115' stroke='%23ff8c00' stroke-width='2' fill='none' opacity='0.20'/%3E%3C/svg%3E");
-        animation: waveMove1 18s linear infinite, waveBob 6s ease-in-out infinite;
-      }
-      .home-waves .wave2 {
-        top: 58%;
-        opacity: 0.18;
-        filter: blur(1.8px);
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='320' viewBox='0 0 1200 320'%3E%3Cpath d='M0 170 C140 210 260 130 410 170 C560 210 660 130 810 170 C960 210 1060 130 1200 170' stroke='%23ff8c00' stroke-width='3' fill='none' opacity='0.45'/%3E%3Cpath d='M0 125 C140 165 260 85 410 125 C560 165 660 85 810 125 C960 165 1060 85 1200 125' stroke='%23ff8c00' stroke-width='2' fill='none' opacity='0.22'/%3E%3C/svg%3E");
-        animation: waveMove2 26s linear infinite, waveBob2 8s ease-in-out infinite;
-      }
-      @keyframes waveMove1 {
-        from {
-          background-position: 0 0;
-        }
-        to {
-          background-position: 1200px 0;
-        }
-      }
-      @keyframes waveMove2 {
-        from {
-          background-position: 0 0;
-        }
-        to {
-          background-position: -1200px 0;
-        }
-      }
-      @keyframes waveBob {
-        0%,
-        100% {
-          transform: translateY(0px) skewY(-1.2deg);
-        }
-        50% {
-          transform: translateY(-10px) skewY(-1.2deg);
-        }
-      }
-      @keyframes waveBob2 {
-        0%,
-        100% {
-          transform: translateY(0px) skewY(1.2deg);
-        }
-        50% {
-          transform: translateY(12px) skewY(1.2deg);
-        }
-      }
-
-      .home-hero {
-        min-height: calc(100vh - 170px);
-        display: grid;
-        place-items: center;
-        text-align: center;
-        padding: 10px 0 30px;
-      }
-      .home-title {
-        margin: 0;
-        font-weight: 900;
-        letter-spacing: 0.6px;
-        font-size: clamp(40px, 6vw, 76px);
-        line-height: 1.08;
-        text-shadow: 0 14px 60px rgba(255, 140, 0, 0.12);
-        text-wrap: balance;
-      }
-      .home-title-line {
-        display: inline-block;
-        white-space: nowrap;
-      }
-      .home-title-line.is-typing::after {
-        content: "";
-        display: inline-block;
-        width: 10px;
-        height: 0.95em;
-        margin-left: 6px;
-        border-right: 2px solid rgba(255, 255, 255, 0.8);
-        transform: translateY(2px);
-        animation: caretBlink 900ms steps(1) infinite;
-      }
-      @keyframes caretBlink {
-        0%,
-        49% {
-          opacity: 1;
-        }
-        50%,
-        100% {
-          opacity: 0;
-        }
-      }
-      .home-subtitle {
-        margin: 14px 0 0;
-        color: var(--muted);
-        font-size: clamp(13px, 1.4vw, 16px);
-        line-height: 1.7;
-        letter-spacing: 0.2px;
-      }
-
-      .nav-right {
-        display: flex;
-        justify-content: flex-end;
-      }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 38px;
-        padding: 0 16px;
-        border-radius: var(--radius-pill);
-        text-decoration: none;
-        font-weight: 700;
-        color: #121212;
-        background: var(--accent);
-        border: 1px solid rgba(255, 140, 0, 0.6);
-        box-shadow: 0 14px 34px rgba(255, 140, 0, 0.22);
-        transition: transform 120ms ease, filter 120ms ease;
-        user-select: none;
-      }
-      .btn:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.02);
-      }
-      .btn:active {
-        transform: translateY(0px);
-      }
-
-      .modal {
-        position: fixed;
-        inset: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        background: rgba(0, 0, 0, 0.55);
-        z-index: 80;
-      }
-      .modal[data-open="true"] {
-        display: flex;
-      }
-      .modal-panel {
-        width: min(520px, 100%);
-        border-radius: 20px;
-        background: var(--card);
-        border: 1px solid var(--stroke);
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-        padding: 18px;
-      }
-      .modal-title {
-        margin: 0;
-        font-size: 18px;
-        font-weight: 800;
-        letter-spacing: 0.3px;
-      }
-      .modal-desc {
-        margin: 10px 0 0;
-        color: var(--muted);
-        line-height: 1.7;
-        font-size: 14px;
-      }
-      .modal-code {
-        margin-top: 14px;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
-        border-radius: 9999px;
-        border: 1px solid var(--stroke);
-        background: #121212;
-        font-variant-numeric: tabular-nums;
-        letter-spacing: 0.6px;
-      }
-      .modal-code b {
-        color: var(--text);
-      }
-      .modal-actions {
-        margin-top: 16px;
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-      }
-      .btn-ghost {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 38px;
-        padding: 0 14px;
-        border-radius: 9999px;
-        text-decoration: none;
-        font-weight: 700;
-        color: var(--text);
-        background: transparent;
-        border: 1px solid var(--stroke);
-        transition: transform 120ms ease, filter 120ms ease;
-        user-select: none;
-        cursor: pointer;
-      }
-      .btn-ghost:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.02);
-      }
-      .btn-ghost:active {
-        transform: translateY(0px);
-      }
-
-      .cards {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-
-      .card {
-        display: grid;
-        grid-template-columns: 380px 1fr;
-        gap: 18px;
-        padding: 18px;
-        border-radius: var(--radius-card);
-        background: var(--card);
-        border: 1px solid var(--stroke);
-        box-shadow: var(--shadow);
-        transition: transform 140ms ease, box-shadow 140ms ease,
-          border-color 140ms ease;
-      }
-      .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 26px 70px rgba(0, 0, 0, 0.38);
-        border-color: rgba(255, 255, 255, 0.22);
-      }
-
-      .media {
-        border-radius: 16px;
-        overflow: hidden;
-        border: 1px solid var(--stroke);
-        background: #141414;
-        aspect-ratio: 4 / 3;
-        display: grid;
-        place-items: center;
-      }
-      .media img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      .content {
-        padding: 6px 6px 6px 2px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 10px;
-        min-width: 0;
-      }
-      .content h2 {
-        margin: 0;
-        font-size: clamp(20px, 1.8vw, 26px);
-        letter-spacing: 0.4px;
-      }
-      .content p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.8;
-        font-size: 15px;
-      }
-
-      .hint {
-        margin: 0 0 14px;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      @media (max-width: 860px) {
-        .card {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 520px) {
-        .nav-links {
-          min-width: 220px;
-          padding: 2px 6px;
-          gap: 4px;
-        }
-        .nav-link {
-          height: 30px;
-          padding: 0 10px;
-          font-size: 12px;
-        }
-        .brand-title {
-          max-width: 130px;
-        }
-        .btn {
-          padding: 0 12px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="home-waves" aria-hidden="true">
-      <div class="wave wave1"></div>
-      <div class="wave wave2"></div>
-    </div>
-
-    <header class="nav" role="navigation" aria-label="顶部导航">
-      <div class="brand" aria-label="站点名称">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <span class="brand-title">蔚澜开发者生态</span>
-      </div>
-
-      <nav class="nav-links" aria-label="主导航">
-        <a class="nav-link" href="./index.html" aria-current="page">首页</a>
-        <a class="nav-link" href="./bottle.html">Bottle系列</a>
-        <a class="nav-link" href="./software.html">氧分科技</a>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light only" />
+  <title>凌腾生态 Lintun</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">凌腾生态Lintun</a>
+      <nav class="menu" aria-label="主导航">
+        <a class="active" href="roxetos-cloud.html">云OS</a>
+        <a href="ecosystem-development.html">生态开发</a>
+        <a href="software-album.html">软件专辑</a>
+        <a href="armink.html">ArmInk</a>
+        <a href="app-store.html">应用商店</a>
       </nav>
+    </div>
+  </header>
 
-      <div class="nav-right">
-        <a class="btn" href="./bottle.html#join" aria-label="加入我们">加入我们</a>
-      </div>
-    </header>
-
-    <main class="wrap" aria-label="首页">
-      <section class="home-hero" aria-label="首页标语">
-        <div>
-          <h1 class="home-title" aria-label="微核聚算力，一屏通万端">
-            <span class="home-title-line" data-text="微核聚算力，一屏通万端"></span>
-          </h1>
-          <p class="home-subtitle">WAXEED唯物智联，新时代SaaS平台解决方案创新领头羊</p>
+  <main id="top">
+    <section class="hero">
+      <div class="panel hero-main">
+        <div class="eyebrow">LIN TUN ECOSYSTEM</div>
+        <h1>共筑生态，<br />你我开始。</h1>
+        <p class="lead">
+          凌腾生态 Lintun 是一群中学生发起的系统生态项目，以 RoxetOS 为中心，
+          围绕系统、开发工具、内容分发与实验性智能能力持续扩展。
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="roxetos-cloud.html">进入 RoxetOS 云操作系统</a>
+          <a class="btn" href="ecosystem-development.html">查看生态开发</a>
         </div>
-      </section>
-    </main>
+      </div>
 
-    <script>
-      (function () {
-        const lines = Array.from(document.querySelectorAll(".home-title-line"));
-        if (lines.length === 0) return;
+      <div class="hero-side">
+        <div class="card">
+          <strong>项目定位</strong>
+          <p>这是一个以 RoxetOS 为核心的开发者集群，目标是把系统、工具和实验项目组织成统一生态。</p>
+        </div>
+        <div class="card">
+          <strong>当前重点</strong>
+          <p>RoxetOS 云操作系统、生态开发、软件专辑与 ArmInk 是目前的主要方向。</p>
+        </div>
+      </div>
+    </section>
 
-        const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-        if (reduceMotion) {
-          for (const el of lines) el.textContent = el.dataset.text || "";
-          return;
-        }
+    <section class="sections">
+      <a class="tile" href="roxetos-cloud.html">
+        <div>
+          <div class="tag">01</div>
+          <h2>RoxetOS 云操作系统</h2>
+          <span>生态核心，面向终端、云端与协作场景的系统入口。</span>
+        </div>
+      </a>
+      <a class="tile" href="ecosystem-development.html">
+        <div>
+          <div class="tag">02</div>
+          <h2>生态开发</h2>
+          <span>面向系统、工具、应用和内容的开发协作入口。</span>
+        </div>
+      </a>
+      <a class="tile" href="software-album.html">
+        <div>
+          <div class="tag">03</div>
+          <h2>软件专辑</h2>
+          <span>汇总生态内的软件、专题与内容发布，作为项目展示与分发入口。</span>
+        </div>
+      </a>
+      <a class="tile" href="armink.html">
+        <div>
+          <div class="tag">04</div>
+          <h2>ArmInk</h2>
+          <span>以中文作为基础训练语言的实验性 AI，探索新的交互与理解方式。</span>
+        </div>
+      </a>
+      <a class="tile" href="app-store.html">
+        <div>
+          <div class="tag">05</div>
+          <h2>应用商店</h2>
+          <span>聚合生态应用与扩展，承接下载、更新和体验路径。</span>
+        </div>
+      </a>
+    </section>
+  </main>
 
-        const perCharMs = 90;
-        const betweenLinesMs = 280;
+  <section class="banner">
+    <div class="banner-inner">
+      <div>
+        <h3>RoxetOS 生态正在形成</h3>
+        <p>下面的入口已经拆成独立二级页面，后续可以继续按项目补充内容。</p>
+      </div>
+      <a class="mini-link" href="roxetos-cloud.html">开始浏览</a>
+    </div>
+  </section>
 
-        function typeOneLine(el) {
-          const text = el.dataset.text || "";
-          el.textContent = "";
-          el.classList.add("is-typing");
-
-          return new Promise((resolve) => {
-            let i = 0;
-            const timer = setInterval(() => {
-              i += 1;
-              el.textContent = text.slice(0, i);
-              if (i >= text.length) {
-                clearInterval(timer);
-                el.classList.remove("is-typing");
-                resolve();
-              }
-            }, perCharMs);
-          });
-        }
-
-        (async function run() {
-          for (const el of lines) {
-            await typeOneLine(el);
-            await new Promise((r) => setTimeout(r, betweenLinesMs));
-          }
-        })();
-      })();
-    </script>
-  </body>
+  <footer class="footer">
+    © 凌腾生态 Lintun
+  </footer>
+</body>
 </html>
