@@ -1,18 +1,21 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light only" />
-  <title>生态开发 - 凌腾生态</title>
+  <title>生态开发 - RoxetOS</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="roxet-page">
   <header class="nav">
     <div class="nav-inner">
-      <a class="brand" href="index.html">凌腾生态Lintun</a>
+      <a class="brand" href="index.html">
+        <img class="brand-icon" src="favicon.ico" alt="" aria-hidden="true" />
+        RoxetOS 生态
+      </a>
       <nav class="menu" aria-label="主导航">
-        <a href="roxetos-cloud.html">云OS</a>
+        <a href="roxetos-cloud.html">RoxetOS Cloud</a>
         <a class="active" href="ecosystem-development.html">生态开发</a>
         <a href="software-album.html">软件专辑</a>
         <a href="armink.html">ArmInk</a>
@@ -20,20 +23,132 @@
       </nav>
     </div>
   </header>
-  <main class="page">
-    <section class="panel">
+
+  <main class="sheet">
+    <section class="hero">
       <div class="eyebrow">02 / DEVELOPMENT</div>
       <h1>生态开发</h1>
-      <p class="meta">围绕 RoxetOS 展开的开发协作入口，覆盖系统、工具、内容和实验性功能。</p>
+      <p class="meta">
+        围绕 RoxetOS SDK 的接入规范、宿主桥接能力和后续扩展路线，整理为开发者可直接使用的入口。
+        当前重点是 Shell Bridge，后续按 SDK v2 逐步补齐存储、协同和原生 UI 能力。
+      </p>
     </section>
-    <aside class="panel">
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">SDK OVERVIEW</div>
+          <h2>SDK 现状</h2>
+        </div>
+        <p>v1 已提供桌面桥接层，v2 在此基础上扩展更完整的应用能力。</p>
+      </div>
+
+      <div class="cards-2">
+        <article class="card">
+          <strong>Shell Bridge v1</strong>
+          <p>作为独立 SDK 模块接入，用于应用主动唤起宿主能力，例如打开系统应用、聚焦窗口、最小化、关闭和桌面通知。</p>
+        </article>
+        <article class="card">
+          <strong>SDK v2 规划</strong>
+          <p>新增应用私有 result 目录、原生协同会话和宿主渲染的弹窗能力，目标是把“能力暴露”标准化，而不是把业务逻辑塞进 SDK。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">INTEGRATION</div>
+          <h2>接入要点</h2>
+        </div>
+        <p>建议新应用先接入 v1，再按需扩展 v2。</p>
+      </div>
+
+      <div class="cards-3">
+        <article class="card">
+          <strong>1. 加载公共脚本</strong>
+          <p>页面通过 `/sdk/roxet-bridge.js` 引入桥接脚本，作为应用和宿主之间的统一入口。</p>
+        </article>
+        <article class="card">
+          <strong>2. 注册桥接对象</strong>
+          <p>调用 `window.Roxet.registerShellBridge()` 获取能力实例，再在业务事件中触发宿主动作。</p>
+        </article>
+        <article class="card">
+          <strong>3. 保持职责清晰</strong>
+          <p>SDK 只负责能力暴露，不负责业务状态、复杂同步或内部 UI 改造。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">API</div>
+          <h2>典型接口</h2>
+        </div>
+        <p>下面是文档中最核心的使用方式，适合直接写入开发页。</p>
+      </div>
+
+      <div class="cards-2">
+        <article class="card">
+          <strong>Shell Bridge v1</strong>
+          <pre><code>&lt;script src="/sdk/roxet-bridge.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const shell = window.Roxet?.registerShellBridge?.()
+
+  shell?.notify("保存成功", "success")
+  shell?.openApp("drive")
+  shell?.focusWindow()
+&lt;/script&gt;</code></pre>
+        </article>
+        <article class="card">
+          <strong>SDK v2 建议接口</strong>
+          <pre><code>window.Roxet.storage.list()
+window.Roxet.storage.read(path)
+window.Roxet.sync.join({ appId: "draw", mode: "collab" })
+window.Roxet.ui.alert({ title, message })</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">MANIFEST</div>
+          <h2>能力声明</h2>
+        </div>
+        <p>建议在 `manifest.json` 中显式声明应用使用到的 SDK 能力。</p>
+      </div>
+
+      <div class="card">
+        <pre><code>{
+  "sdk": {
+    "storage": true,
+    "collaboration": true,
+    "nativeDialog": true
+  }
+}</code></pre>
+        <p class="meta" style="margin-top: 14px;">
+          这类声明便于宿主按能力做权限、渲染和兼容性控制，也便于后续扩展新模块。
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">ROADMAP</div>
+          <h2>推荐落地顺序</h2>
+        </div>
+        <p>从最小可用功能开始，逐步扩展到更完整的生态开发能力。</p>
+      </div>
+
       <ul class="list">
-        <li>开发者协作与规范</li>
-        <li>接口、工具链、文档</li>
-        <li>面向中学生开发者的实验环境</li>
-        <li>后续可扩展：文档中心、贡献指南</li>
+        <li>先完成 Shell Bridge 接入，让应用具备基础桌面交互能力。</li>
+        <li>再补充 result 目录和云文件扫描，形成应用级持久化能力。</li>
+        <li>最后引入协同会话和原生弹窗，提升复杂应用的交互一致性。</li>
       </ul>
-    </aside>
+    </section>
   </main>
 </body>
 </html>

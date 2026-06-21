@@ -38,7 +38,7 @@ a { color: inherit; text-decoration: none; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--text);
@@ -47,13 +47,12 @@ a { color: inherit; text-decoration: none; }
   transition: 0.2s ease;
 }
 
-.brand::before {
-  content: "";
-  width: 12px;
-  height: 12px;
-  background: var(--red);
-  border-radius: 0;
-  box-shadow: 0 0 0 4px var(--red-soft);
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+  flex: 0 0 40px;
+  object-fit: contain;
 }
 
 .brand:hover { border-color: var(--line); background: #fafafa; }
@@ -292,6 +291,21 @@ h1 {
   white-space: nowrap;
 }
 
+.contact-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contact-list a {
+  color: var(--red);
+  word-break: break-all;
+}
+
 .page {
   max-width: 1240px;
   margin: 0 auto;
@@ -299,6 +313,107 @@ h1 {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 24px;
+}
+
+.roxet-page {
+  display: block;
+}
+
+.roxet-page .sheet {
+  max-width: 1180px;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background: #fffdf9;
+  box-shadow: 0 24px 60px rgba(70, 55, 37, 0.08);
+  overflow: hidden;
+}
+
+.roxet-page .hero {
+  max-width: none;
+  margin: 0;
+  padding: 34px 38px;
+  display: block;
+}
+
+.roxet-page .section {
+  padding: 34px 38px;
+}
+
+.roxet-page .cards-2,
+.roxet-page .cards-3 {
+  display: grid;
+  gap: 16px;
+}
+
+.roxet-page .cards-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.roxet-page .cards-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.roxet-page .card,
+.roxet-page .domain {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.roxet-page .section-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.roxet-page .section-title p {
+  max-width: 560px;
+  color: var(--muted);
+}
+
+.roxet-page .diagram {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,246,239,0.96));
+}
+
+.roxet-page .domain ul {
+  padding-left: 18px;
+}
+
+.roxet-page .domain-links,
+.roxet-page .flow-list {
+  display: grid;
+  gap: 12px;
+}
+
+.roxet-page .flow-item {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.roxet-page .flow-item strong {
+  color: var(--red);
+  font: 700 12px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.roxet-page .flow-item p {
+  color: var(--muted);
+}
+
+.roxet-page .footer {
+  padding: 0 38px 28px;
 }
 
 .page .panel {
@@ -334,6 +449,19 @@ h1 {
   .hero, .page { grid-template-columns: 1fr; }
   .sections { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .banner-inner { flex-direction: column; align-items: flex-start; }
+  .roxet-page .cards-2,
+  .roxet-page .cards-3 {
+    grid-template-columns: 1fr;
+  }
+  .roxet-page .section-title,
+  .roxet-page .layer-top {
+    display: grid;
+    gap: 14px;
+  }
+  .roxet-page .flow-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -344,4 +472,10 @@ h1 {
   .sections { grid-template-columns: 1fr; }
   .btn { width: 100%; }
   .page .panel { padding: 24px; }
+  .roxet-page .hero,
+  .roxet-page .section,
+  .roxet-page .footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
