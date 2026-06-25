@@ -29,28 +29,28 @@
       <div class="eyebrow">02 / DEVELOPMENT</div>
       <h1>生态开发</h1>
       <p class="meta">
-        围绕 云OS SDK 的接入规范、宿主桥接能力和后续扩展路线，整理为开发者可直接使用的入口。
-        当前重点是 Shell Bridge，后续按 SDK v2 逐步补齐存储、协同和原生 UI 能力。
+        这是 RoxetOS / 云OS 的开发者接入页，按 SDK v2 的方式整理应用私有存储、协同会话、原生弹窗和宿主桥接能力。
+        目标很简单：让应用只通过 SDK 和宿主交互，不直接碰系统内部实现。
       </p>
     </section>
 
     <section class="section">
       <div class="section-title">
         <div>
-          <div class="eyebrow">SDK OVERVIEW</div>
-          <h2>SDK 现状</h2>
+          <div class="eyebrow">POSITIONING</div>
+          <h2>开发定位</h2>
         </div>
-        <p>v1 已提供桌面桥接层，v2 在此基础上扩展更完整的应用能力。</p>
+        <p>v1 解决桌面桥接，v2 补齐应用级持久化、协同和宿主原生 UI。</p>
       </div>
 
       <div class="cards-2">
         <article class="card">
-          <strong>Shell Bridge v1</strong>
-          <p>作为独立 SDK 模块接入，用于应用主动唤起宿主能力，例如打开系统应用、聚焦窗口、最小化、关闭和桌面通知。</p>
+          <strong>宿主负责什么</strong>
+          <p>窗口管理、通知、原生弹窗、应用打开、云文件扫描和协同会话的统一调度。</p>
         </article>
         <article class="card">
-          <strong>SDK v2 规划</strong>
-          <p>新增应用私有 result 目录、原生协同会话和宿主渲染的弹窗能力，目标是把“能力暴露”标准化，而不是把业务逻辑塞进 SDK。</p>
+          <strong>应用负责什么</strong>
+          <p>业务状态、页面渲染、操作流转，以及把可持久化内容写入自己的 `result/` 目录。</p>
         </article>
       </div>
     </section>
@@ -58,56 +58,23 @@
     <section class="section">
       <div class="section-title">
         <div>
-          <div class="eyebrow">INTEGRATION</div>
-          <h2>接入要点</h2>
+          <div class="eyebrow">STRUCTURE</div>
+          <h2>推荐目录结构</h2>
         </div>
-        <p>建议新应用先接入 v1，再按需扩展 v2。</p>
+        <p>优先保持应用目录清晰，让宿主能稳定发现结果文件和静态资源。</p>
       </div>
 
-      <div class="cards-3">
-        <article class="card">
-          <strong>1. 加载公共脚本</strong>
-          <p>页面通过 `/sdk/roxet-bridge.js` 引入桥接脚本，作为应用和宿主之间的统一入口。</p>
-        </article>
-        <article class="card">
-          <strong>2. 注册桥接对象</strong>
-          <p>调用 `window.Roxet.registerShellBridge()` 获取能力实例，再在业务事件中触发宿主动作。</p>
-        </article>
-        <article class="card">
-          <strong>3. 保持职责清晰</strong>
-          <p>SDK 只负责能力暴露，不负责业务状态、复杂同步或内部 UI 改造。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-title">
-        <div>
-          <div class="eyebrow">API</div>
-          <h2>典型接口</h2>
-        </div>
-        <p>下面是文档中最核心的使用方式，适合直接写入开发页。</p>
-      </div>
-
-      <div class="cards-2">
-        <article class="card">
-          <strong>Shell Bridge v1</strong>
-          <pre><code>&lt;script src="/sdk/roxet-bridge.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  const shell = window.Roxet?.registerShellBridge?.()
-
-  shell?.notify("保存成功", "success")
-  shell?.openApp("drive")
-  shell?.focusWindow()
-&lt;/script&gt;</code></pre>
-        </article>
-        <article class="card">
-          <strong>SDK v2 建议接口</strong>
-          <pre><code>window.Roxet.storage.list()
-window.Roxet.storage.read(path)
-window.Roxet.sync.join({ appId: "draw", mode: "collab" })
-window.Roxet.ui.alert({ title, message })</code></pre>
-        </article>
+      <div class="card">
+        <pre><code>sys/
+└── notes/
+    ├── manifest.json
+    ├── app.py
+    ├── templates/
+    ├── static/
+    └── result/</code></pre>
+        <p class="meta" style="margin-top: 14px;">
+          `result/` 是应用私有输出目录，宿主会扫描 `user/&lt;username&gt;/sys/*/result/**` 并在云文件中展示。
+        </p>
       </div>
     </section>
 
@@ -117,20 +84,144 @@ window.Roxet.ui.alert({ title, message })</code></pre>
           <div class="eyebrow">MANIFEST</div>
           <h2>能力声明</h2>
         </div>
-        <p>建议在 `manifest.json` 中显式声明应用使用到的 SDK 能力。</p>
+        <p>建议在 `manifest.json` 里显式声明应用用到的 SDK 能力。</p>
       </div>
 
-      <div class="card">
-        <pre><code>{
+      <div class="cards-2">
+        <article class="card">
+          <strong>最小配置</strong>
+          <pre><code>{
+  "id": "notes",
+  "name": "Notes",
+  "version": "1.0.0",
+  "launch": "http://127.0.0.1:5000"
+}</code></pre>
+        </article>
+        <article class="card">
+          <strong>推荐配置</strong>
+          <pre><code>{
+  "id": "notes",
+  "name": "Notes",
+  "version": "1.0.0",
+  "launch": "http://127.0.0.1:5000",
   "sdk": {
     "storage": true,
     "collaboration": true,
     "nativeDialog": true
   }
 }</code></pre>
-        <p class="meta" style="margin-top: 14px;">
-          这类声明便于宿主按能力做权限、渲染和兼容性控制，也便于后续扩展新模块。
-        </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">BOOTSTRAP</div>
+          <h2>初始化 SDK</h2>
+        </div>
+        <p>先引入桥接脚本，再按需获取能力实例。</p>
+      </div>
+
+      <div class="cards-2">
+        <article class="card">
+          <strong>桥接入口</strong>
+          <pre><code>&lt;script src="/sdk/roxet-bridge.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const shell = window.Roxet?.registerShellBridge?.()
+&lt;/script&gt;</code></pre>
+        </article>
+        <article class="card">
+          <strong>能力入口</strong>
+          <pre><code>window.Roxet.storage
+window.Roxet.ui
+window.Roxet.sync
+window.Roxet.version</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">SHELL BRIDGE</div>
+          <h2>宿主桥接能力</h2>
+        </div>
+        <p>保留 v1 的核心能力，用于窗口和宿主动作控制。</p>
+      </div>
+
+      <div class="cards-3">
+        <article class="card">
+          <strong>通知</strong>
+          <p>`shell.notify(message, type)` 用于成功、警告、错误和普通提示。</p>
+        </article>
+        <article class="card">
+          <strong>打开应用</strong>
+          <p>`shell.openApp(appId)` 用于从当前应用跳转到系统应用。</p>
+        </article>
+        <article class="card">
+          <strong>窗口控制</strong>
+          <p>`shell.focusWindow()`、`shell.minimizeWindow()`、`shell.closeWindow()` 负责基础窗口交互。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">STORAGE</div>
+          <h2>应用私有存储</h2>
+        </div>
+        <p>应用只能默认写入自己的 `result/`，不能越界访问别的应用目录。</p>
+      </div>
+
+      <div class="cards-2">
+        <article class="card">
+          <strong>常用接口</strong>
+          <pre><code>window.Roxet.storage.list()
+window.Roxet.storage.read(path)
+window.Roxet.storage.write(path, data)
+window.Roxet.storage.remove(path)
+window.Roxet.storage.pickFolder()</code></pre>
+        </article>
+        <article class="card">
+          <strong>约束</strong>
+          <ul class="list">
+            <li>默认只允许写入本应用的 `result/`。</li>
+            <li>云文件应用负责扫描和展示结果文件。</li>
+            <li>这不是通用网盘，也不是跨应用共享存储。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">UI + SYNC</div>
+          <h2>原生弹窗与协同</h2>
+        </div>
+        <p>复杂应用优先用宿主能力，避免自己在 iframe 里重造 UI 和同步层。</p>
+      </div>
+
+      <div class="cards-2">
+        <article class="card">
+          <strong>原生弹窗</strong>
+          <pre><code>window.Roxet.ui.alert({ title, message })
+window.Roxet.ui.confirm({ title, message })
+window.Roxet.ui.prompt({ title, message, defaultValue })
+window.Roxet.ui.custom({ title, content, actions })</code></pre>
+        </article>
+        <article class="card">
+          <strong>协同会话</strong>
+          <pre><code>const session = window.Roxet.sync.join({
+  appId: "draw",
+  mode: "collab"
+})</code></pre>
+          <p class="meta" style="margin-top: 14px;">
+            适合画板、文档编辑器和需要实时同步状态的应用。
+          </p>
+        </article>
       </div>
     </section>
 
@@ -140,14 +231,33 @@ window.Roxet.ui.alert({ title, message })</code></pre>
           <div class="eyebrow">ROADMAP</div>
           <h2>推荐落地顺序</h2>
         </div>
-        <p>从最小可用功能开始，逐步扩展到更完整的生态开发能力。</p>
+        <p>按最小可用能力逐步扩展，先稳定再增强。</p>
       </div>
 
       <ul class="list">
-        <li>先完成 Shell Bridge 接入，让应用具备基础桌面交互能力。</li>
-        <li>再补充 result 目录和云文件扫描，形成应用级持久化能力。</li>
-        <li>最后引入协同会话和原生弹窗，提升复杂应用的交互一致性。</li>
+        <li>先接入 `Shell Bridge`，把通知、开窗和窗口控制跑通。</li>
+        <li>再补 `result/` 和 `storage`，形成应用私有持久化。</li>
+        <li>最后接入 `ui` 和 `sync`，完善复杂交互与实时协作。</li>
       </ul>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">CHECKLIST</div>
+          <h2>发布前检查</h2>
+        </div>
+        <p>上线前至少确认这些项没有问题。</p>
+      </div>
+
+      <div class="card">
+        <ul class="list">
+          <li>`manifest.json` 能正确声明应用和 SDK 能力。</li>
+          <li>应用可正常启动，窗口关闭和刷新后不会异常。</li>
+          <li>读写文件、原生弹窗和协同会话都能按预期工作。</li>
+          <li>不会访问未授权目录，也不会把控制台刷成错误输出。</li>
+        </ul>
+      </div>
     </section>
   </main>
 </body>
