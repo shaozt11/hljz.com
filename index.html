@@ -15,7 +15,7 @@
         <a href="roxetos-cloud.html">云OS</a>
         <a href="ecosystem-development.html">生态开发</a>
         <a href="software-album.html">软件专辑</a>
-        <a href="armink.html">ArmInk</a>
+        <a href="armink.html">工作台</a>
         <a href="app-store.html">应用商店</a>
       </nav>
     </div>
@@ -31,17 +31,21 @@
           围绕系统、开发工具、内容分发与实验性智能能力持续扩展。
         </p>
         <div class="actions">
-          <a class="btn primary" href="roxetos-cloud.html">进入云OS 云操作系统</a>
+          <a class="btn primary" href="roxetos-cloud.html">进入 RoxetOS</a>
           <a class="btn" href="ecosystem-development.html">查看生态开发</a>
           <a class="btn" href="https://qm.qq.com/q/hI5Wi8M3Qs" target="_blank" rel="noreferrer">加入我们</a>
         </div>
       </div>
 
       <div class="hero-side">
-        <div class="card">
-          <strong>核心成员</strong>
-          <p>蔚澜公司董事长、offmn-user、山地奥斯卡537、FocalList233333、DIS310、不凡之路</p>
-          <p style="margin-top: 10px;">（排名不分先后）</p>
+        <div class="card card-ecosystem">
+          <strong>生态支持</strong>
+          <p>开发者仅需提供Python/Flask项目，并撰写配置文件。</p>
+          <p>另外也可以适配SDK并上架应用商店（需联系我们）。</p>
+          <p>我们也会给生态开发者免费提供网页托管服务。</p>
+          <div class="card-actions">
+            <button class="btn small" type="button" data-open-modal>成员/软件</button>
+          </div>
         </div>
         <div class="card">
           <strong>当前重点</strong>
@@ -49,7 +53,7 @@
             最近有点小忙，暑假搞些大的，比如我们成立的第一期发布会 WLDC26，
             还有内含 8 个软件的软件专辑。包括 FocalServer、RoxetOS、SDK 等等。
             哦对了，新的云OS工程版本演示视频也在做了，最近在修它的史级 UI......
-            另外我们已经规划了 ArmInk、“Triton”（一个奇怪的代号）等一大堆实验性项目！
+            另外我们已经规划了 工作台、“Triton”（一个奇怪的代号）等一大堆实验性项目！
             欢迎加入！
           </p>
         </div>
@@ -60,7 +64,7 @@
       <a class="tile" href="roxetos-cloud.html">
         <div>
           <div class="tag">01</div>
-          <h2>云OS 云操作系统</h2>
+          <h2>RoxetOS</h2>
           <span>生态核心，面向终端、云端与协作场景的系统入口。</span>
         </div>
       </a>
@@ -81,7 +85,7 @@
       <a class="tile" href="armink.html">
         <div>
           <div class="tag">04</div>
-          <h2>ArmInk</h2>
+          <h2>工作台</h2>
           <span>以中文作为基础训练语言的实验性 AI，探索新的交互与理解方式。</span>
         </div>
       </a>
@@ -114,5 +118,61 @@
   <footer class="footer">
     © 凌腾生态 Lingtun
   </footer>
+  <div class="modal" id="membersModal" hidden aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="membersModalTitle">
+      <div class="modal-header">
+        <h2 id="membersModalTitle">成员 / 软件</h2>
+        <button class="modal-close" type="button" aria-label="关闭" data-close-modal>×</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-title">核心成员</p>
+        <p>蔚澜公司董事长、offmn-user、山地奥斯卡537、FocalList233333、MrGreen、不凡之路、kroxis@kroxis-PC:~$""</p>
+        <p class="modal-gap"></p>
+        <p class="modal-title">一期软件</p>
+        <p>C Sharp Command Editor、537秒表、PulWork2026、DisPlayer、氧分绘画、DisMark、氧分图表、智能计算器、扫雷、氧分驿站、我找网</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const modal = document.getElementById('membersModal');
+      const openButtons = document.querySelectorAll('[data-open-modal]');
+      const closeButtons = document.querySelectorAll('[data-close-modal]');
+
+      // 确保弹窗初始为关闭状态
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+
+      const openModal = () => {
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      };
+
+      const closeModal = () => {
+        modal.hidden = true;
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      };
+
+      closeModal();
+
+      openButtons.forEach((button) => button.addEventListener('click', openModal));
+      closeButtons.forEach((button) => button.addEventListener('click', closeModal));
+      
+      // 点击背景层也关闭弹窗
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.addEventListener('click', closeModal);
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
