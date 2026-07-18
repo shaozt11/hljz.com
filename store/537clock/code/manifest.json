@@ -1,0 +1,20 @@
+{
+  "name": "537 Clock",
+  "icon": "/api/apps/537Clock/icon",
+  "port": null,
+  "platforms": ["win32"],
+  "terminal": {
+    "input": "key",
+    "controls": [
+      { "label": "t", "value": "t" },
+      { "label": "a", "value": "a" },
+      { "label": "w", "value": "w" },
+      { "label": "e", "value": "e" },
+      { "label": "l", "value": "l" },
+      { "label": "o", "value": "o" },
+      { "label": "s", "value": "s" },
+      { "label": "x", "value": "x" },
+      { "label": "q", "value": "q" }
+    ]
+  }
+}

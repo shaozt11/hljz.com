@@ -1,0 +1,6 @@
+app:
+  icon: "logo.ico"
+  main_binary: "537Clock"
+  port: none
+  start_command: ["python3", "main.py"]
+  version: "1.4.0"
