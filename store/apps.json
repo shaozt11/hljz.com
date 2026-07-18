@@ -3,12 +3,16 @@
     {
       "id": "csce",
       "name": "C Sharp Command Editor",
-      "version": "1.0.0",
       "author": "offmn-user",
       "icon": "https://lingtun.com/store/csce/icon.png",
-      "description": "轻量级CLI文本编辑器",
-      "download": "https://lingtun.com/store/csce/code/"
-    },
+      "download": "https://lingtun.com/store/csce/code/",
+      "files": [
+        "manifest.json",
+        "main.py",
+      ]
+    }
+  ]
+},
     {
       "id": "537clock",
       "name": "537秒表",
@@ -17,6 +21,12 @@
       "icon": "https://lingtun.com/store/537clock/logo.ico",
       "description": "超强的秒表软件！",
       "download": "https://lingtun.com/store/537clock/code/"
+      "files": [
+        "manifest.json",
+        "main.py",
+        "logo.ico",
+        "README.md",
+      ]
     }
   ]
 }
