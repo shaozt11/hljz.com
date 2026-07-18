@@ -8,11 +8,9 @@
       "download": "https://lingtun.com/store/csce/code/",
       "files": [
         "manifest.json",
-        "main.py",
+        "main.py"
       ]
-    }
-  ]
-},
+    },
     {
       "id": "537clock",
       "name": "537秒表",
@@ -20,12 +18,12 @@
       "author": "537工作室",
       "icon": "https://lingtun.com/store/537clock/logo.ico",
       "description": "超强的秒表软件！",
-      "download": "https://lingtun.com/store/537clock/code/"
+      "download": "https://lingtun.com/store/537clock/code/",
       "files": [
         "manifest.json",
         "main.py",
         "logo.ico",
-        "README.md",
+        "README.md"
       ]
     }
   ]
