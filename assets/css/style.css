@@ -163,6 +163,14 @@ a:hover {
   animation: blink 1.6s steps(2, start) infinite;
 }
 
+.logo-img {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.22));
+}
+
 .logo-text {
   display: flex;
   flex-direction: column;
@@ -1528,6 +1536,11 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   color: var(--amber);
   border: 1px solid rgba(255, 176, 32, 0.35);
   padding: 2px 9px;
+}
+
+.article-card .ac-state.live {
+  color: var(--green);
+  border-color: rgba(61, 220, 132, 0.4);
 }
 
 .article-card h3 {

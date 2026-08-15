@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tranxet：RoxetOS 兼容层 | 文档</title>
-  <meta name="description" content="Tranxet 文档：面向 RoxetOS 的兼容层，让既有软件与依赖无缝运行。">
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <title>Tranxet · RoxetOS 兼容层 | 文档</title>
+  <meta name="description" content="Tranxet（RoxetOS 兼容层）文档：免登录桌面、应用格式、SDK 能力与配置说明。">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script>
     try {
@@ -23,7 +23,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="../index.html">
-        <span class="logo-mark"></span>
+        <img class="logo-img" src="../assets/logo.png" alt="彗流矩阵" width="38" height="38">
         <span class="logo-text">
           <span class="logo-cn">彗流矩阵</span>
           <span class="logo-en">Cometrix</span>
@@ -52,16 +52,15 @@
       <div class="container">
         <div class="breadcrumb">COMETRIX / DOCS / ARTICLE <span class="cur">// Tranxet</span></div>
         <h1>
-          Tranxet：RoxetOS 兼容层
-          <span class="en">ROXETOS COMPATIBILITY LAYER</span>
+          Tranxet · RoxetOS 兼容层
+          <span class="en">ROXETOS COMPAT // 免登录桌面</span>
         </h1>
-        <p>让既有软件与依赖在目标环境中无缝运行。</p>
+        <p>免登录桌面兼容层：放入应用即运行，完整支持 RoxetOS SDK。</p>
       </div>
     </section>
 
     <section class="section">
-      <div class="container docs-layout">
-        <nav class="docs-nav reveal">
+      <div class="container docs-layout"><nav class="docs-nav reveal">
           <div class="docs-nav-title">DOC TREE</div>
           <ul>
             <li><a href="../docs.html">← 文档中心</a></li>
@@ -70,70 +69,75 @@
             <li><a href="crixstudio.html">CrixStudio 7</a></li>
           </ul>
           <div class="docs-nav-title" style="border-top: 1px solid var(--line);">本文目录</div>
-          <ul>
-            <li><a href="#overview">产品概述</a></li>
-            <li><a href="#status">当前状态</a></li>
-            <li><a href="#roadmap">规划方向</a></li>
-            <li><a href="#links">相关链接</a></li>
+          <ul class="toc">
+<li><a href="#ch-1">特性</a></li>
+<li><a href="#ch-2">快速开始</a></li>
+<li><a href="#ch-3">目录结构</a></li>
+<li><a href="#ch-4">在 sys/ 里放应用</a></li>
+<li><a href="#ch-5">SDK 能力</a></li>
+<li><a href="#ch-6">内置示例</a></li>
+<li><a href="#ch-7">常见问题</a></li>
+<li><a href="#ch-8">自检</a></li>
+<li><a href="#ch-9">配置</a></li>
           </ul>
         </nav>
-
         <div class="doc-panel reveal">
-          <div class="status-line warn">
-            <span style="color: var(--amber);">●</span>
-            开发中 · 尚未上线 · 本文为规划稿
-          </div>
+          <div class="status-line"><span style="color: var(--green);">●</span>源码已公开：<a href="https://github.com/weilanfurry/tranxet-compat" target="_blank" rel="noopener">github.com/weilanfurry/tranxet-compat</a> · 产品尚未正式上线 · 应用商店能力（LayStore）已随兼容层内置</div>
+<p>从 <code>v1</code> 中提取出的独立兼容层：启动后<strong>无需登录</strong>，直接进入 RoxetOS 桌面；把 Python、HTML、Flask 应用放进 <code>sys/</code> 目录，即可在桌面窗口（弹窗）中运行，并完整支持 RoxetOS SDK。</p><section id="ch-1"><h2>特性</h2><ul><li><strong>免登录</strong>：自动创建本地 <code>guest</code> 用户，打开即桌面，无登录页。</li><li><strong>三种应用格式</strong>：文件夹应用（Flask / Python / H5）、直接丢单个 <code>.py</code> / <code>.html</code> 文件到 <code>sys/</code>、单文件 Flask 配同名 <code>xxx.flask.json</code>。</li><li><strong>桌面窗口运行</strong>：点击桌面图标即弹窗打开，支持拖拽、缩放、最小化、最大化。</li><li><strong>SDK 全功能</strong>：打开应用、窗口控制、桌面通知、原生弹窗、结果文件存储、多窗口协同。</li><li><strong>完整内置应用</strong>：云盘、终端、应用商店、浏览器代理、设置、计算器、便签。</li><li><strong>稳健的服务管理</strong>：Flask 服务启动后等待端口就绪才返回；进程按进程树清理，不残留僵尸进程。</li></ul></section><section id="ch-2"><h2>快速开始</h2><h3>方式一：Windows 双击</h3><div class="code-block"><div class="code-head"><span>BATCH</span><span>CODE</span></div><pre><code data-lang="bat">start.bat</code></pre></div><h3>方式二：PowerShell</h3><div class="code-block"><div class="code-head"><span>POWERSHELL</span><span>CODE</span></div><pre><code data-lang="powershell">.\start.ps1</code></pre></div><p>首次启动会自动创建 <code>venv</code>、安装 <code>requirements.txt</code>，然后打开浏览器：</p><div class="code-block"><div class="code-head"><span>TEXT</span><span>CODE</span></div><pre><code data-lang="text">http://127.0.0.1:8000</code></pre></div><h3>方式三：手动启动（依赖已装好）</h3><div class="code-block"><div class="code-head"><span>BASH</span><span>CODE</span></div><pre><code data-lang="bash">python server.py --host 0.0.0.0 --port 8000</code></pre></div><p><code>server.py</code> 支持从任意目录启动（自动把自身目录加入模块搜索路径）。</p></section><section id="ch-3"><h2>目录结构</h2><div class="code-block"><div class="code-head"><span>TEXT</span><span>CODE</span></div><pre><code data-lang="text">compat/
+  server.py            # 启动入口（FastAPI + Uvicorn）
+  roxetos/             # 兼容层后端
+  frontend/            # 预构建桌面前端（含 /sdk/roxet-bridge.js）
+  sys/                 # 应用目录：把 Py / HTML / Flask 应用放这里
+  data/                # 本地数据库（自动创建）
+  user/                # 用户数据：云盘、workspace、SDK 结果（自动创建）
+  start.ps1 / start.bat
+  requirements.txt
+  selftest.ps1 / ws_check.py   # 自检</code></pre></div></section><section id="ch-4"><h2>在 sys/ 里放应用</h2><h3>1. 文件夹应用（推荐）</h3><div class="code-block"><div class="code-head"><span>TEXT</span><span>CODE</span></div><pre><code data-lang="text">sys/MyApp/
+  manifest.json
+  main.py             # Python 终端应用
+  app.py              # 或 Flask 服务应用（manifest 声明 runtime: flask + port）
+  index.html          # 或 H5 应用（没有 Python 入口时）
+  logo.png            # 可选图标</code></pre></div><p>Flask 服务应用 manifest 示例：</p><div class="code-block"><div class="code-head"><span>JSON</span><span>CODE</span></div><pre><code data-lang="json">{
+  "name": "MyApp",
+  "icon": "logo.png",
+  "runtime": "flask",
+  "port": 5010,
+  "start_path": "/",
+  "platforms": ["win32", "linux", "darwin"]
+}</code></pre></div><h3>2. 直接放单个文件（无需建文件夹）</h3><div class="code-block"><div class="code-head"><span>TEXT</span><span>CODE</span></div><pre><code data-lang="text">sys/
+  hello.py            # Python 终端应用，应用 id = hello
+  hello.html          # H5 应用，应用 id = hello
+  hello.flask.json    # （可选）hello.py 作为 Flask 服务应用时的配置
+  hello.manifest.json # （可选）名字、图标、platforms、terminal 等</code></pre></div><p>单个 <code>.py</code> 默认作为终端应用运行；若同名 <code>xxx.flask.json</code> / <code>xxx.manifest.json</code> 声明了 <code>runtime: "flask"</code> 和 <code>port</code>，则按 Flask 服务应用启动。单个 <code>.html</code> 直接作为 H5 应用。</p><h3>manifest 字段</h3><div class="doc-table-wrap"><table class="doc-table"><thead><tr><th>字段</th><th>说明</th></tr></thead><tbody><tr><td><code>name</code></td><td>桌面显示名称</td></tr><tr><td><code>icon</code></td><td>图标：相对路径（如 <code>logo.png</code>）或宿主资源路径（如 <code>/img/logo.png</code>）</td></tr><tr><td><code>runtime</code></td><td><code>flask</code> / <code>node</code> / <code>express</code> / 留空</td></tr><tr><td><code>port</code></td><td>服务应用端口（Flask/Node 必填）</td></tr><tr><td><code>start_path</code></td><td>打开时拼到服务 URL 后的路径，默认 <code>/</code></td></tr><tr><td><code>platforms</code></td><td>支持平台列表，如 <code>["win32","linux","darwin"]</code></td></tr><tr><td><code>terminal</code></td><td>Python 终端应用交互配置，见下</td></tr></tbody></table></div><p>终端应用交互配置示例：</p><div class="code-block"><div class="code-head"><span>JSON</span><span>CODE</span></div><pre><code data-lang="json">{
+  "terminal": {
+    "input": "terminal",
+    "echoInput": true
+  }
+}</code></pre></div><p><code>input</code> 可选：<code>stdin</code>（底部输入框）、<code>terminal</code>（直接在终端区输入）、<code>key</code>（按键模式，配合 <code>controls</code> 快捷按钮）。</p></section><section id="ch-5"><h2>SDK 能力</h2><h3>页面如何加载桥接脚本</h3><p>H5 应用（由宿主同源提供）直接相对路径加载：</p><div class="code-block"><div class="code-head"><span>HTML</span><span>CODE</span></div><pre><code data-lang="html">&lt;script src="/sdk/roxet-bridge.js"&gt;&lt;/script&gt;</code></pre></div><p>Flask 应用（独立端口）从宿主加载：</p><div class="code-block"><div class="code-head"><span>HTML</span><span>CODE</span></div><pre><code data-lang="html">&lt;script&gt;
+  const hostFromQuery = new URLSearchParams(location.search).get("__roxet_host")
+  const bridgeOrigin = hostFromQuery || `${location.protocol}//${location.hostname}:8000`
+  const bridge = document.createElement("script")
+  bridge.src = `${bridgeOrigin}/sdk/roxet-bridge.js`
+  bridge.onload = () =&gt; {
+    const sdk = window.Roxet &amp;&amp; window.Roxet.registerShellBridge ? window.Roxet.registerShellBridge() : null
+    // 在这里绑定按钮事件
+  }
+  document.head.appendChild(bridge)
+&lt;/script&gt;</code></pre></div><blockquote class="doc-quote">宿主默认运行在 8000 端口；若改用其他端口，访问应用时带 <code>?__roxet_host=http://&lt;宿主地址&gt;:&lt;端口&gt;</code> 即可（示例代码会自动读取）。</blockquote><h3>SDK 接口</h3><div class="doc-table-wrap"><table class="doc-table"><thead><tr><th>能力</th><th>调用</th><th>说明</th></tr></thead><tbody><tr><td>打开应用</td><td><code>sdk.openApp(appId)</code></td><td>打开系统/自定义应用</td></tr><tr><td>窗口控制</td><td><code>sdk.focusWindow()</code> / <code>sdk.minimizeWindow()</code> / <code>sdk.closeWindow()</code></td><td>聚焦/最小化/关闭当前窗口</td></tr><tr><td>桌面通知</td><td><code>sdk.notify(message, type)</code></td><td>type：info / success / warning / error</td></tr><tr><td>原生弹窗</td><td><code>sdk.ui.alert()</code> / <code>sdk.ui.confirm()</code> / <code>sdk.ui.prompt()</code> / <code>sdk.ui.custom()</code></td><td>宿主渲染的弹窗</td></tr><tr><td>结果存储</td><td><code>sdk.storage.list/read/write/remove(appId, path)</code></td><td>读写 <code>user/guest/sys/&lt;appId&gt;/result/</code></td></tr><tr><td>协同</td><td><code>sdk.sync.join({appId})</code></td><td><code>channel.send / requestSnapshot / leave / onMessage</code></td></tr></tbody></table></div><p>最小 H5 示例：</p><div class="code-block"><div class="code-head"><span>HTML</span><span>CODE</span></div><pre><code data-lang="html">&lt;script src="/sdk/roxet-bridge.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const sdk = window.Roxet?.registerShellBridge?.()
+  const appId = "MyApp"
 
-          <section id="overview">
-            <h2>产品概述</h2>
-            <div class="doc-sub">OVERVIEW // 兼容层定位</div>
-            <p>
-              Tranxet 是面向 <code>RoxetOS</code> 的兼容层，
-              目标是让既有软件与其依赖在目标环境中保持运行，
-              从而降低向 RoxetOS 迁移的成本。
-            </p>
-            <p style="margin-top: 10px;">
-              原 <code>LayStore</code> 应用商店平台已并入 Tranxet，
-              应用目录与分发能力随兼容层一并提供。
-            </p>
-            <h3>核心目标</h3>
-            <ul>
-              <li>保持既有应用行为的一致性。</li>
-              <li>减少迁移时的改造工作量。</li>
-              <li>提供可验证的兼容性基线。</li>
-            </ul>
-          </section>
+  document.getElementById("save").onclick = async () =&gt; {
+    await sdk.storage.write(appId, "state.json", JSON.stringify({ at: Date.now() }))
+    sdk.notify("保存成功", "success")
+  }
 
-          <section id="status" style="margin-top: 40px;">
-            <h2>当前状态</h2>
-            <div class="doc-sub">STATUS // 开发阶段</div>
-            <ul>
-              <li>处于研发阶段，核心设计与原型验证进行中。</li>
-              <li><strong>尚未正式上线</strong>，仓库暂未公开。</li>
-              <li>正式发布后将在 GitHub 组织下开放源码与文档。</li>
-            </ul>
-          </section>
-
-          <section id="roadmap" style="margin-top: 40px;">
-            <h2>规划方向</h2>
-            <div class="doc-sub">ROADMAP // 规划中，不构成承诺</div>
-            <ul>
-              <li>兼容层核心实现。</li>
-              <li>运行时依赖适配。</li>
-              <li>应用迁移与验证工具。</li>
-              <li>兼容性文档与测试矩阵。</li>
-            </ul>
-          </section>
-
-          <section id="links" style="margin-top: 40px;">
-            <h2>相关链接</h2>
-            <div class="doc-sub">LINKS // 外部通道</div>
-            <ul>
-              <li><a href="../products.html#tranxet" target="_blank" rel="noopener">产品页</a></li>
-              <li><a href="https://github.com/weilanfurry" target="_blank" rel="noopener">GitHub</a></li>
-              <li><a href="../contact.html">联系我们</a></li>
-            </ul>
-          </section>
+  document.getElementById("dialog").onclick = async () =&gt; {
+    const ok = await sdk.ui.confirm({ title: "确认", message: "要继续吗？" })
+    sdk.notify(ok ? "已确认" : "已取消", "info")
+  }
+&lt;/script&gt;</code></pre></div></section><section id="ch-6"><h2>内置示例</h2><p><code>sys/</code> 里已带 5 个示例，启动后桌面直接可见：</p><div class="doc-table-wrap"><table class="doc-table"><thead><tr><th>应用</th><th>类型</th><th>说明</th></tr></thead><tbody><tr><td>SDKDemo</td><td>Flask 文件夹应用（5010）</td><td>演示全部 SDK 能力：原生弹窗、存储、协同</td></tr><tr><td>JetAgent</td><td>H5 文件夹应用</td><td>静态 H5 页面</td></tr><tr><td>Python 单文件示例</td><td><code>hello_py.py</code> 终端应用</td><td>REPL 交互，演示 stdin 回显</td></tr><tr><td>HTML 单文件示例</td><td><code>hello_html.html</code> H5</td><td>演示通知、弹窗、SDK 存储</td></tr><tr><td>Flask 单文件示例</td><td><code>flask_demo.py</code>（5011）</td><td>演示通知、弹窗、打开其他应用</td></tr></tbody></table></div></section><section id="ch-7"><h2>常见问题</h2><h3>打开 Flask 应用提示“127.0.0.1 拒绝访问”</h3><p>已内置“等待服务就绪”逻辑：打开窗口前会轮询应用端口，直到真正监听才返回。若仍失败，多半是端口被其他进程占用，检查：</p><div class="code-block"><div class="code-head"><span>POWERSHELL</span><span>CODE</span></div><pre><code data-lang="powershell">Get-NetTCPConnection -LocalPort 5011 -State Listen</code></pre></div><h3>Flask 页面按钮没反应</h3><p>通常是 SDK 桥接脚本没加载成功。确认页面脚本来源是宿主地址（默认 <code>http://&lt;hostname&gt;:8000/sdk/roxet-bridge.js</code>），不是 Flask 自身端口；宿主换了端口时给应用 URL 加 <code>?__roxet_host=...</code>。</p><h3>协同（sync）连不上</h3><p>桥接脚本会由宿主动态注入端口，协同 WebSocket 自动跟随宿主端口，无需手动改地址。</p><h3>应用商店显示什么</h3><p>商店客户端连接服务器 <code>http://lingtun.com/store/apps.json</code>，应用列表以服务器数据为准（“一期软件”按服务器实际清单展示）。界面不显示作者，商店成员含“林落泽”。预置应用不能从商店卸载（避免误删）；安装外部软件需要联网。</p></section><section id="ch-8"><h2>自检</h2><div class="code-block"><div class="code-head"><span>POWERSHELL</span><span>CODE</span></div><pre><code data-lang="powershell">.\selftest.ps1 -PythonPath &lt;python.exe&gt; [-Port 8010]</code></pre></div><p>自检覆盖：免登录会话、sys 应用识别（文件夹 + 单文件）、桥接脚本端口注入、桌面首页与图标、SDK 存储读写、原生弹窗分类、Flask 服务拉起与页面访问、<code>/ws/run</code> Python 终端应用运行与输入回显、SDK 协同广播与快照。</p></section><section id="ch-9"><h2>配置</h2><div class="doc-table-wrap"><table class="doc-table"><thead><tr><th>环境变量</th><th>默认值</th><th>说明</th></tr></thead><tbody><tr><td><code>ROXETOS_HOST</code></td><td><code>0.0.0.0</code></td><td>宿主监听地址</td></tr><tr><td><code>ROXETOS_PORT</code></td><td><code>8000</code></td><td>宿主端口</td></tr><tr><td><code>ROXETOS_SESSION_SECRET</code></td><td>内置开发密钥</td><td>会话签名密钥，生产环境请修改</td></tr></tbody></table></div><p>命令行参数优先级更高：<code>python server.py --host 127.0.0.1 --port 9000</code>。</p></section>
         </div>
       </div>
     </section>
@@ -144,7 +148,7 @@
       <div class="footer-grid">
         <div>
           <a class="logo" href="../index.html">
-            <span class="logo-mark"></span>
+            <img class="logo-img" src="../assets/logo.png" alt="彗流矩阵" width="38" height="38">
             <span class="logo-text">
               <span class="logo-cn">彗流矩阵</span>
               <span class="logo-en">Cometrix</span>
