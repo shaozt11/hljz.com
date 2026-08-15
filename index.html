@@ -1,178 +1,316 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light only" />
-  <title>凌腾生态Lingtun</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>彗流矩阵 COMETRIX | 开源软件工坊</title>
+  <meta name="description" content="彗流矩阵（Cometrix）——开源软件工坊，正在研发 Tranxet、Triton AIOS、CrixStudio 7。">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    try {
+      var t = localStorage.getItem("cometrix-theme");
+      if (!t) { t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"; }
+      document.documentElement.dataset.theme = t;
+    } catch (e) {
+      document.documentElement.dataset.theme = "dark";
+    }
+  </script>
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-inner">
-       <a class="brand" href="index.html"><img class="brand-icon" src="favicon.ico" alt="" aria-hidden="true" />凌腾生态Lingtun</a>
-      <nav class="menu" aria-label="主导航">
-        <a href="roxetos-cloud.html">云OS</a>
-        <a href="ecosystem-development.html">生态开发</a>
-        <a href="software-album.html">软件专辑</a>
-        <a href="armink.html">工作台</a>
-        <a href="app-store.html">应用商店</a>
+  <div class="scanlines"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark"></span>
+        <span class="logo-text">
+          <span class="logo-cn">彗流矩阵</span>
+          <span class="logo-en">Cometrix</span>
+        </span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html" class="active">首页</a>
+        <a href="products.html">产品</a>
+        <a href="repository.html">仓库</a>
+        <a href="docs.html">文档</a>
+        <a href="contact.html">联系</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <span class="status-chip"><span class="dot"></span>SYSTEM ONLINE</span>
+      <button class="nav-toggle" aria-label="菜单" type="button">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <main id="top">
+  <main>
     <section class="hero">
-      <div class="panel hero-main">
-        <div class="eyebrow">LIN TUN ECOSYSTEM</div>
-        <h1>共筑生态，<br />你我开始。</h1>
-        <p class="lead">
-           凌腾生态Lingtun 是一群中学生发起的系统生态项目，以云OS 为中心，
-          围绕系统、开发工具、内容分发与实验性智能能力持续扩展。
-        </p>
-        <div class="actions">
-          <a class="btn primary" href="roxetos-cloud.html">进入 RoxetOS</a>
-          <a class="btn" href="ecosystem-development.html">查看生态开发</a>
-          <a class="btn" href="https://qm.qq.com/q/hI5Wi8M3Qs" target="_blank" rel="noreferrer">加入我们</a>
-        </div>
-      </div>
-
-      <div class="hero-side">
-        <div class="card card-ecosystem">
-          <strong>生态支持</strong>
-          <p>开发者仅需提供Python/Flask项目，并撰写配置文件。</p>
-          <p>另外也可以适配SDK并上架应用商店（需联系我们）。</p>
-          <p>我们也会给生态开发者免费提供网页托管服务。</p>
-          <div class="card-actions">
-            <button class="btn small" type="button" data-open-modal>成员/软件</button>
+      <div class="hero-grid"></div>
+      <div class="container">
+        <div>
+          <div class="hero-kicker">OPEN SOURCE WORKSHOP // EST. 2024</div>
+          <h1>
+            彗流矩阵
+            <span class="en">COMETRIX // CORE SYSTEM</span>
+          </h1>
+          <p class="hero-sub">
+            以代码为引力，汇聚每一颗彗星。彗流矩阵是一个开源软件工坊：
+            构建应用商店平台、系统兼容层与 AI 工作台，并把过程沉淀为文档与可复用的仓库。
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="products.html">[ 查看产品 ]</a>
+            <a class="btn" href="repository.html">[ 访问仓库 ]</a>
+            <a class="btn amber" href="contact.html">[ 加入我们 ]</a>
           </div>
         </div>
-        <div class="card">
-          <strong>当前重点</strong>
-          <p>
-            最近有点小忙，暑假搞些大的，比如我们成立的第一期发布会 WLDC26，
-            还有内含 8 个软件的软件专辑。包括 FocalServer、RoxetOS、SDK 等等。
-            哦对了，新的云OS工程版本演示视频也在做了，最近在修它的史级 UI......
-            另外我们已经规划了 工作台、“Triton”（一个奇怪的代号）等一大堆实验性项目！
-            欢迎加入！
-          </p>
+
+        <div class="terminal reveal" data-type>
+          <div class="terminal-head">
+            <span class="term-dot r"></span>
+            <span class="term-dot y"></span>
+            <span class="term-dot g"></span>
+            <span class="term-title">cometrix@core:~$ boot</span>
+          </div>
+          <div class="term-body">
+            <span class="ln"><span class="p">user@cometrix</span>:<span class="info">~</span>$ cometrix boot --release=v1.0</span>
+            <span class="ln"><span class="dim">[00:00.01]</span> <span class="info">INIT</span> loading core modules…</span>
+            <span class="ln"><span class="dim">[00:00.12]</span> <span class="ok">OK</span>   mount <span class="info">tranxet</span> → roxetos.compat + laystore</span>
+            <span class="ln"><span class="dim">[00:00.26]</span> <span class="ok">OK</span>   mount <span class="info">triton-aios</span> → agent-os.api</span>
+            <span class="ln"><span class="dim">[00:00.33]</span> <span class="ok">OK</span>   mount <span class="info">crixstudio-7</span> → ai-workbench</span>
+            <span class="ln"><span class="dim">[00:00.31]</span> <span class="info">SYNC</span> github.com/weilanfurry … <span class="ok">done</span></span>
+            <span class="ln"><span class="dim">[00:00.40]</span> <span class="p">STATUS</span> <span class="amber">PRE-LAUNCH</span> // 三个核心模块研发中，敬请期待。</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="sections">
-      <a class="tile" href="roxetos-cloud.html">
-        <div>
-          <div class="tag">01</div>
-          <h2>RoxetOS</h2>
-          <span>生态核心，面向终端、云端与协作场景的系统入口。</span>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>COMETRIX SYSTEM</span><span class="sep">◆</span>
+        <span>TRANXET // ROXETOS COMPAT</span><span class="sep">◆</span>
+        <span>TRITON AIOS // AGENT OS</span><span class="sep">◆</span>
+        <span>CRIXSTUDIO 7 // AI WORKBENCH</span><span class="sep">◆</span>
+        <span>PRE-LAUNCH · OPEN SOURCE</span><span class="sep">◆</span>
+        <span>COMETRIX SYSTEM</span><span class="sep">◆</span>
+        <span>TRANXET // ROXETOS COMPAT</span><span class="sep">◆</span>
+        <span>TRITON AIOS // AGENT OS</span><span class="sep">◆</span>
+        <span>CRIXSTUDIO 7 // AI WORKBENCH</span><span class="sep">◆</span>
+        <span>PRE-LAUNCH · OPEN SOURCE</span><span class="sep">◆</span>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat reveal">
+            <span class="stat-code">ID:01</span>
+            <div class="stat-num">03</div>
+            <div class="stat-label">在册产品 / PRODUCTS</div>
+          </div>
+          <div class="stat reveal">
+            <span class="stat-code">ID:02</span>
+            <div class="stat-num">02<em>+</em></div>
+            <div class="stat-label">开源平台 / REPOS</div>
+          </div>
+          <div class="stat reveal">
+            <span class="stat-code">ID:03</span>
+            <div class="stat-num">04</div>
+            <div class="stat-label">联络通道 / CHANNELS</div>
+          </div>
+          <div class="stat reveal">
+            <span class="stat-code">ID:04</span>
+            <div class="stat-num">100<em>%</em></div>
+            <div class="stat-label">开源驱动 / OPEN</div>
+          </div>
         </div>
-      </a>
-      <a class="tile" href="ecosystem-development.html">
-        <div>
-          <div class="tag">02</div>
-          <h2>生态开发</h2>
-          <span>面向系统、工具、应用和内容的开发协作入口。</span>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">System Overview // 系统概览</div>
+          <h2>我们做什么？<span class="accent">三个模块，一条流水线</span></h2>
+          <p class="section-desc">彗流矩阵围绕产品开发、文档沉淀与社区协作组织工作，每一步都开放可见。</p>
         </div>
-      </a>
-      <a class="tile" href="software-album.html">
-        <div>
-          <div class="tag">03</div>
-          <h2>软件专辑</h2>
-          <span>汇总生态内的软件、专题与内容发布，作为项目展示与分发入口。</span>
+        <div class="card-grid">
+          <div class="card reveal">
+            <div class="card-icon">01</div>
+            <h3>软件产品</h3>
+            <p>从应用分发平台到系统兼容层与 AI 工作台，聚焦真正需要解决的基础问题。</p>
+            <div class="card-meta">
+              <span>MODULE // PROD</span>
+              <a class="card-link" href="products.html">进入</a>
+            </div>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon">02</div>
+            <h3>文档中心</h3>
+            <p>使用手册、参数说明与格式规范逐步沉淀，让每个项目都能被快速上手与二次开发。</p>
+            <div class="card-meta">
+              <span>MODULE // DOCS</span>
+              <a class="card-link" href="docs.html">进入</a>
+            </div>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon">03</div>
+            <h3>社区协作</h3>
+            <p>通过 GitHub、Bilibili 与 QQ 群保持通道开放：反馈、讨论、测试、内测都在这里发生。</p>
+            <div class="card-meta">
+              <span>MODULE // COMM</span>
+              <a class="card-link" href="contact.html">进入</a>
+            </div>
+          </div>
         </div>
-      </a>
-      <a class="tile" href="armink.html">
-        <div>
-          <div class="tag">04</div>
-          <h2>工作台</h2>
-          <span>以中文作为基础训练语言的实验性 AI，探索新的交互与理解方式。</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">Active Modules // 核心模块</div>
+          <h2>当前<span class="accent">正在研发</span>的产品线</h2>
+          <p class="section-desc">三个核心模块均在研发中，尚未上线；应用分发能力已并入 Tranxet。</p>
         </div>
-      </a>
-      <a class="tile" href="app-store.html">
-        <div>
-          <div class="tag">05</div>
-          <h2>应用商店</h2>
-          <span>聚合生态应用与扩展，承接下载、更新和体验路径。</span>
+        <div class="card-grid">
+          <div class="card reveal">
+            <div class="card-icon">T</div>
+            <h3>Tranxet</h3>
+            <p>面向 RoxetOS 的兼容层，集成 LayStore 应用商店能力，兼顾迁移与分发。</p>
+            <div class="tag-row">
+              <span class="tag cyan">COMPAT</span>
+              <span class="tag amber">PRE-LAUNCH</span>
+            </div>
+            <div class="card-meta">
+              <span>STATUS // 研发中</span>
+              <a class="card-link" href="products.html#tranxet">详情</a>
+            </div>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon">A</div>
+            <h3>Triton AIOS</h3>
+            <p>以 LLM Agent OS 为核心的 FastAPI 复刻版，构建 Agent 运行环境。</p>
+            <div class="tag-row">
+              <span class="tag cyan">LLM</span>
+              <span class="tag amber">PRE-LAUNCH</span>
+            </div>
+            <div class="card-meta">
+              <span>STATUS // 研发中</span>
+              <a class="card-link" href="products.html#triton-aios">详情</a>
+            </div>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon">W</div>
+            <h3>CrixStudio 7</h3>
+            <p>类似 WorkBuddy 的通用开源 AI 工作台：对话、工具与自动化工作流。</p>
+            <div class="tag-row">
+              <span class="tag cyan">AI</span>
+              <span class="tag green">OPEN SOURCE</span>
+              <span class="tag amber">PRE-LAUNCH</span>
+            </div>
+            <div class="card-meta">
+              <span>STATUS // 研发中</span>
+              <a class="card-link" href="products.html#crixstudio-7">详情</a>
+            </div>
+          </div>
         </div>
-      </a>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">Workflow // 工作流</div>
+          <h2>从一行代码到<span class="accent">一个产品</span></h2>
+          <p class="section-desc">标准流水线保证每个项目都有清晰的生命周期。</p>
+        </div>
+        <div class="pipeline">
+          <div class="pipe reveal">
+            <h3>开发</h3>
+            <p>小步提交，保持标准库优先与可离线运行。</p>
+          </div>
+          <div class="pipe reveal">
+            <h3>测试</h3>
+            <p>在真实环境（Windows / 浏览器）验证行为。</p>
+          </div>
+          <div class="pipe reveal">
+            <h3>发布</h3>
+            <p>打包应用清单并同步到仓库与商店目录。</p>
+          </div>
+          <div class="pipe reveal">
+            <h3>维护</h3>
+            <p>根据 Issue 与社区反馈持续迭代版本。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <div>
+          <h2>准备好与彗流一起前进了吗？</h2>
+          <p>逛一逛仓库，读一读文档，或者直接加入社区。</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="repository.html">[ 进入仓库 ]</a>
+          <a class="btn amber" href="docs.html">[ 阅读文档 ]</a>
+        </div>
+      </div>
     </section>
   </main>
 
-  <section class="banner">
-    <div class="banner-inner">
-      <div>
-        <h3>联系方式</h3>
-        <ul class="contact-list">
-          <li>Github: <a href="https://github.com/weilanfurry" target="_blank" rel="noreferrer">https://github.com/weilanfurry</a></li>
-          <li>Gitee: 稍后开放</li>
-          <li>Bilibili: <a href="https://space.bilibili.com/1911534718" target="_blank" rel="noreferrer">https://space.bilibili.com/1911534718</a></li>
-          <li>Q群: <a href="https://qm.qq.com/q/hI5Wi8M3Qs" target="_blank" rel="noreferrer">https://qm.qq.com/q/hI5Wi8M3Qs</a></li>
-           <li>邮箱: <a href="mailto:uild913@outlook.com">uild913@outlook.com</a></li>
-        </ul>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html">
+            <span class="logo-mark"></span>
+            <span class="logo-text">
+              <span class="logo-cn">彗流矩阵</span>
+              <span class="logo-en">Cometrix</span>
+            </span>
+          </a>
+          <p class="footer-about">开源软件工坊 · 以代码为引力，汇聚每一颗彗星。所有产品与文档开放可见。</p>
+        </div>
+        <div class="footer-col">
+          <h4>NAV // 导航</h4>
+          <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="products.html">产品</a></li>
+            <li><a href="repository.html">仓库</a></li>
+            <li><a href="docs.html">文档</a></li>
+            <li><a href="contact.html">联系</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>PRODUCTS // 产品</h4>
+          <ul>
+            <li><a href="products.html#tranxet">Tranxet</a></li>
+            <li><a href="products.html#triton-aios">Triton AIOS</a></li>
+            <li><a href="products.html#crixstudio-7">CrixStudio 7</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CHANNEL // 通道</h4>
+          <ul>
+            <li><a href="https://github.com/weilanfurry" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://space.bilibili.com/1911534718" target="_blank" rel="noopener">Bilibili</a></li>
+            <li><a href="https://qm.qq.com/q/hI5Wi8M3Qs" target="_blank" rel="noopener">QQ 群</a></li>
+            <li><a href="mailto:uild913@outlook.com">Email</a></li>
+          </ul>
+        </div>
       </div>
-       <a class="mini-link" href="mailto:uild913@outlook.com">联系我</a>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> COMETRIX · 彗流矩阵 · 保留部分权利</span>
+        <span class="ver">BUILD v1.0.0 // OPEN SOURCE</span>
+      </div>
     </div>
-  </section>
-
-  <footer class="footer">
-    © 凌腾生态 Lingtun
   </footer>
-  <div class="modal" id="membersModal" hidden aria-hidden="true">
-    <div class="modal-backdrop" data-close-modal></div>
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="membersModalTitle">
-      <div class="modal-header">
-        <h2 id="membersModalTitle">成员 / 软件</h2>
-        <button class="modal-close" type="button" aria-label="关闭" data-close-modal>×</button>
-      </div>
-      <div class="modal-body">
-        <p class="modal-title">核心成员</p>
-        <p>蔚澜公司董事长、offmn-user、山地奥斯卡537、FocalList233333、MrGreen、不凡之路、kroxis@kroxis-PC:~$""</p>
-        <p class="modal-gap"></p>
-        <p class="modal-title">一期软件</p>
-        <p>C Sharp Command Editor、537秒表、PulWork2026、DisPlayer、氧分绘画、DisMark、氧分图表、智能计算器、扫雷、氧分驿站、我找网</p>
-      </div>
-    </div>
-  </div>
 
-  <script>
-    (() => {
-      const modal = document.getElementById('membersModal');
-      const openButtons = document.querySelectorAll('[data-open-modal]');
-      const closeButtons = document.querySelectorAll('[data-close-modal]');
-
-      // 确保弹窗初始为关闭状态
-      modal.hidden = true;
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('modal-open');
-
-      const openModal = () => {
-        modal.hidden = false;
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-      };
-
-      const closeModal = () => {
-        modal.hidden = true;
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-      };
-
-      closeModal();
-
-      openButtons.forEach((button) => button.addEventListener('click', openModal));
-      closeButtons.forEach((button) => button.addEventListener('click', closeModal));
-      
-      // 点击背景层也关闭弹窗
-      const backdrop = document.querySelector('.modal-backdrop');
-      if (backdrop) {
-        backdrop.addEventListener('click', closeModal);
-      }
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && !modal.hidden) closeModal();
-      });
-    })();
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

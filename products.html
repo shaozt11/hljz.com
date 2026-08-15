@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品中心 | 彗流矩阵 COMETRIX</title>
+  <meta name="description" content="彗流矩阵产品中心：Tranxet 兼容层、Triton AIOS、CrixStudio 7。">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    try {
+      var t = localStorage.getItem("cometrix-theme");
+      if (!t) { t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"; }
+      document.documentElement.dataset.theme = t;
+    } catch (e) {
+      document.documentElement.dataset.theme = "dark";
+    }
+  </script>
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark"></span>
+        <span class="logo-text">
+          <span class="logo-cn">彗流矩阵</span>
+          <span class="logo-en">Cometrix</span>
+        </span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">首页</a>
+        <a href="products.html" class="active">产品</a>
+        <a href="repository.html">仓库</a>
+        <a href="docs.html">文档</a>
+        <a href="contact.html">联系</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <span class="status-chip"><span class="dot"></span>SYSTEM ONLINE</span>
+      <button class="nav-toggle" aria-label="菜单" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb">COMETRIX / PRODUCTS <span class="cur">// 产品</span></div>
+        <h1>
+          产品中心
+          <span class="en">PRODUCT REGISTRY</span>
+        </h1>
+        <p>当前产品线聚焦系统兼容与 AI 工作流，应用分发能力已并入 Tranxet。以下模块均处于研发阶段，尚未正式上线。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="product-grid">
+
+          <article class="product reveal" id="tranxet">
+            <div class="product-top">
+              <span class="product-id">ID // A-TX</span>
+              <span class="logo-mark"></span>
+              <h3>Tranxet</h3>
+              <div class="sub">ROXETOS COMPAT + LAYSTORE // 系统兼容层</div>
+            </div>
+            <div class="product-body">
+              <p>面向 RoxetOS 的兼容层，并集成 LayStore 应用商店能力：既让既有软件与依赖无缝迁移，也统一提供应用分发。</p>
+              <div class="tag-row">
+                <span class="tag cyan">COMPAT</span>
+                <span class="tag">STORE</span>
+                <span class="tag amber">ROXETOS</span>
+                <span class="tag">LAYER</span>
+              </div>
+              <ul class="spec-list">
+                <li><span>形态</span><span class="val">系统兼容层</span></li>
+                <li><span>目标</span><span class="val">应用无缝迁移</span></li>
+                <li><span>已集成</span><span class="val">LayStore 应用商店</span></li>
+                <li><span>状态</span><span class="val">研发中 · 未上线</span></li>
+              </ul>
+              <div class="product-actions">
+                <a class="btn small amber" href="docs/tranxet.html">项目文档</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product reveal" id="triton-aios">
+            <div class="product-top">
+              <span class="product-id">ID // B-TA</span>
+              <span class="logo-mark"></span>
+              <h3>Triton AIOS</h3>
+              <div class="sub">LLM AGENT OS // AGENT 运行环境</div>
+            </div>
+            <div class="product-body">
+              <p>以 LLM Agent OS 为核心的 FastAPI 复刻版：构建可编程、可扩展的 Agent 运行与编排环境。</p>
+              <div class="tag-row">
+                <span class="tag cyan">LLM</span>
+                <span class="tag amber">AGENT OS</span>
+                <span class="tag">FASTAPI</span>
+              </div>
+              <ul class="spec-list">
+                <li><span>形态</span><span class="val">Agent 运行环境</span></li>
+                <li><span>技术栈</span><span class="val">FastAPI · LLM</span></li>
+                <li><span>状态</span><span class="val">研发中 · 未上线</span></li>
+              </ul>
+              <div class="product-actions">
+                <a class="btn small amber" href="docs/triton.html">项目文档</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product reveal" id="crixstudio-7">
+            <div class="product-top">
+              <span class="product-id">ID // C-CS7</span>
+              <span class="logo-mark"></span>
+              <h3>CrixStudio 7</h3>
+              <div class="sub">AI WORKBENCH // 通用开源 AI 工作台</div>
+            </div>
+            <div class="product-body">
+              <p>类似 WorkBuddy 的通用开源 AI 工作台：集成对话、工具调用与自动化工作流，面向日常任务。</p>
+              <div class="tag-row">
+                <span class="tag cyan">AI</span>
+                <span class="tag green">OPEN SOURCE</span>
+                <span class="tag amber">WORKFLOW</span>
+              </div>
+              <ul class="spec-list">
+                <li><span>形态</span><span class="val">AI 工作台</span></li>
+                <li><span>定位</span><span class="val">通用 · 开源 · 可扩展</span></li>
+                <li><span>状态</span><span class="val">研发中 · 未上线</span></li>
+              </ul>
+              <div class="product-actions">
+                <a class="btn small amber" href="docs/crixstudio.html">项目文档</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="soon reveal" style="margin-top: 26px;">
+          <span class="big">▸▸▸</span>
+          <p>下一个模块正在装配中</p>
+          <p style="font-size: 11px; margin-top: 4px;">ALL SYSTEMS // 正式上线时间以仓库与社区公告为准</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <div>
+          <h2>想查看源码与版本记录？</h2>
+          <p>所有产品均在仓库开放，欢迎浏览与贡献。</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="repository.html">[ 进入仓库 ]</a>
+          <a class="btn amber" href="docs.html">[ 阅读文档 ]</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html">
+            <span class="logo-mark"></span>
+            <span class="logo-text">
+              <span class="logo-cn">彗流矩阵</span>
+              <span class="logo-en">Cometrix</span>
+            </span>
+          </a>
+          <p class="footer-about">开源软件工坊 · 以代码为引力，汇聚每一颗彗星。所有产品与文档开放可见。</p>
+        </div>
+        <div class="footer-col">
+          <h4>NAV // 导航</h4>
+          <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="products.html">产品</a></li>
+            <li><a href="repository.html">仓库</a></li>
+            <li><a href="docs.html">文档</a></li>
+            <li><a href="contact.html">联系</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>PRODUCTS // 产品</h4>
+          <ul>
+            <li><a href="products.html#tranxet">Tranxet</a></li>
+            <li><a href="products.html#triton-aios">Triton AIOS</a></li>
+            <li><a href="products.html#crixstudio-7">CrixStudio 7</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CHANNEL // 通道</h4>
+          <ul>
+            <li><a href="https://github.com/weilanfurry" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://space.bilibili.com/1911534718" target="_blank" rel="noopener">Bilibili</a></li>
+            <li><a href="https://qm.qq.com/q/hI5Wi8M3Qs" target="_blank" rel="noopener">QQ 群</a></li>
+            <li><a href="mailto:uild913@outlook.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> COMETRIX · 彗流矩阵 · 保留部分权利</span>
+        <span class="ver">BUILD v1.0.0 // OPEN SOURCE</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

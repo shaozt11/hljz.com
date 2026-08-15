@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我们 | 彗流矩阵 COMETRIX</title>
+  <meta name="description" content="联系彗流矩阵：GitHub、Bilibili、QQ 群、邮箱。欢迎反馈与共建。">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    try {
+      var t = localStorage.getItem("cometrix-theme");
+      if (!t) { t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"; }
+      document.documentElement.dataset.theme = t;
+    } catch (e) {
+      document.documentElement.dataset.theme = "dark";
+    }
+  </script>
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark"></span>
+        <span class="logo-text">
+          <span class="logo-cn">彗流矩阵</span>
+          <span class="logo-en">Cometrix</span>
+        </span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">首页</a>
+        <a href="products.html">产品</a>
+        <a href="repository.html">仓库</a>
+        <a href="docs.html">文档</a>
+        <a href="contact.html" class="active">联系</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <span class="status-chip"><span class="dot"></span>SYSTEM ONLINE</span>
+      <button class="nav-toggle" aria-label="菜单" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb">COMETRIX / CONTACT <span class="cur">// 联系</span></div>
+        <h1>
+          联系我们
+          <span class="en">COMMUNICATION CHANNELS</span>
+        </h1>
+        <p>反馈 bug、提出建议、加入内测，或者只是来打个招呼——所有通道保持开放。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+          <div>
+            <div class="section-label" style="margin-bottom: 18px;">Channels // 通道</div>
+            <div class="channel-grid">
+              <a class="channel reveal" href="https://github.com/weilanfurry" target="_blank" rel="noopener">
+                <span class="ch-tag">ONLINE</span>
+                <span class="ch-icon">[ GH ]</span>
+                <span class="ch-name">GitHub</span>
+                <span class="ch-desc">github.com/weilanfurry</span>
+              </a>
+              <a class="channel reveal" href="https://space.bilibili.com/1911534718" target="_blank" rel="noopener">
+                <span class="ch-tag">ONLINE</span>
+                <span class="ch-icon">[ BV ]</span>
+                <span class="ch-name">Bilibili</span>
+                <span class="ch-desc">space.bilibili.com/1911534718</span>
+              </a>
+              <a class="channel reveal" href="https://qm.qq.com/q/hI5Wi8M3Qs" target="_blank" rel="noopener">
+                <span class="ch-tag">ONLINE</span>
+                <span class="ch-icon">[ QQ ]</span>
+                <span class="ch-name">QQ 群</span>
+                <span class="ch-desc">qm.qq.com/q/hI5Wi8M3Qs</span>
+              </a>
+              <a class="channel reveal" href="mailto:uild913@outlook.com">
+                <span class="ch-tag">ONLINE</span>
+                <span class="ch-icon">[ @ ]</span>
+                <span class="ch-name">Email</span>
+                <span class="ch-desc">uild913@outlook.com</span>
+              </a>
+              <span class="channel reveal" style="cursor: default;">
+                <span class="ch-tag wait">COMING SOON</span>
+                <span class="ch-icon">[ GE ]</span>
+                <span class="ch-name">Gitee</span>
+                <span class="ch-desc">镜像仓库 · 稍后开放</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-panel reveal">
+            <h3>发送消息 / DIRECT MAIL</h3>
+            <p class="hint">表单将调用本地邮件客户端，发送至 uild913@outlook.com。</p>
+            <form data-mailto="uild913@outlook.com">
+              <div class="form-row">
+                <label for="f-subject">SUBJECT / 主题</label>
+                <input id="f-subject" name="subject" type="text" placeholder="例如：Triton AIOS 反馈" required>
+              </div>
+              <div class="form-row">
+                <label for="f-body">BODY / 内容</label>
+                <textarea id="f-body" name="body" placeholder="描述你的问题、建议或想参与的方向……" required></textarea>
+              </div>
+              <button class="btn primary" type="submit" style="width: 100%; justify-content: center;">[ 生成邮件 ]</button>
+              <p class="form-note">
+                &gt; 邮件发出后请留意回复；<br>
+                &gt; 产品 bug 建议优先在 GitHub 提交 Issue，便于追踪。
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <div class="faq">
+          <div class="section-head">
+            <div class="section-label">FAQ // 常见问题</div>
+            <h2>也许你想<span class="accent">先问这些</span></h2>
+          </div>
+          <div class="faq-grid">
+            <div class="faq-item reveal">
+              <div class="q">产品收费吗？</div>
+              <div class="a">不收费。所有产品均计划开源免费，正式发布后代码将在 GitHub 公开。</div>
+            </div>
+            <div class="faq-item reveal">
+              <div class="q">遇到 bug 怎么办？</div>
+              <div class="a">推荐在 GitHub 提交 Issue（附环境与复现步骤），或到 QQ 群直接反馈。</div>
+            </div>
+            <div class="faq-item reveal">
+              <div class="q">想参与开发可以吗？</div>
+              <div class="a">当然。产品正式开源后即可 Fork 提交 PR，也可以先到群里聊聊你的想法。</div>
+            </div>
+            <div class="faq-item reveal">
+              <div class="q">Gitee 什么时候开放？</div>
+              <div class="a">镜像仓库正在规划中，开放后会在官网与社区公告。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <div>
+          <h2>先看看产品和文档？</h2>
+          <p>动手之前，了解一下我们在做什么。</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="products.html">[ 产品中心 ]</a>
+          <a class="btn amber" href="docs.html">[ 文档中心 ]</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html">
+            <span class="logo-mark"></span>
+            <span class="logo-text">
+              <span class="logo-cn">彗流矩阵</span>
+              <span class="logo-en">Cometrix</span>
+            </span>
+          </a>
+          <p class="footer-about">开源软件工坊 · 以代码为引力，汇聚每一颗彗星。所有产品与文档开放可见。</p>
+        </div>
+        <div class="footer-col">
+          <h4>NAV // 导航</h4>
+          <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="products.html">产品</a></li>
+            <li><a href="repository.html">仓库</a></li>
+            <li><a href="docs.html">文档</a></li>
+            <li><a href="contact.html">联系</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>PRODUCTS // 产品</h4>
+          <ul>
+            <li><a href="products.html#tranxet">Tranxet</a></li>
+            <li><a href="products.html#triton-aios">Triton AIOS</a></li>
+            <li><a href="products.html#crixstudio-7">CrixStudio 7</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CHANNEL // 通道</h4>
+          <ul>
+            <li><a href="https://github.com/weilanfurry" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://space.bilibili.com/1911534718" target="_blank" rel="noopener">Bilibili</a></li>
+            <li><a href="https://qm.qq.com/q/hI5Wi8M3Qs" target="_blank" rel="noopener">QQ 群</a></li>
+            <li><a href="mailto:uild913@outlook.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> COMETRIX · 彗流矩阵 · 保留部分权利</span>
+        <span class="ver">BUILD v1.0.0 // OPEN SOURCE</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
