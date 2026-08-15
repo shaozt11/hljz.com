@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册 - 工作台</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="register-form">
+            <h2>用户注册</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regUsername">用户名:</label>
+                    <input type="text" id="regUsername" name="regUsername" required minlength="3" maxlength="20">
+                    <small>3-20个字符</small>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">密码:</label>
+                    <input type="password" id="regPassword" name="regPassword" required minlength="6">
+                    <small>至少6个字符</small>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">确认密码:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <p class="admin-tip">提示：用户名设置为admin将自动获得管理员权限</p>
+                <button type="submit" class="submit-btn">注册</button>
+            </form>
+            <div class="form-footer">
+                <p>已有账号? <a href="/login">立即登录</a></p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>由PulTorch & UildStudio提供技术支持</p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

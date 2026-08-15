@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ collection.name }} - DisPlayer{% endblock %}
+{% block content %}
+<section class="card collection-hero">
+  <div class="collection-thumb collection-thumb--lg">
+    {% if collection.cover_filename %}
+      <img class="collection-thumb-image" src="{{ url_for('collection_cover', collection_id=collection.id) }}" alt="{{ collection.name }} 封面">
+    {% else %}
+      <span class="collection-thumb-placeholder"></span>
+    {% endif %}
+  </div>
+  <div class="collection-hero-copy">
+    <h1>{{ collection.name }}</h1>
+    <p class="muted">{{ collection.description or '暂无简介' }}</p>
+  </div>
+</section>
+
+<section class="card">
+  <h2>合集内歌曲</h2>
+  {% if songs %}
+    <div class="list">
+      {% for song in songs %}
+        <div class="list-item">
+          <div>
+            <strong>{{ song.title }}</strong>
+            <div class="muted">{{ song.artist or '未知歌手' }}</div>
+          </div>
+          <a href="{{ url_for('play_song', song_id=song.id) }}">播放</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="muted">这个合集里还没有歌曲。</p>
+  {% endif %}
+</section>
+{% endblock %}

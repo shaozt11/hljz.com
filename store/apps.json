@@ -25,6 +25,169 @@
         "logo.ico",
         "README.md"
       ]
+    },
+    {
+      "id": "displayer",
+      "name": "DisPlayer",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/displayer/logo.png",
+      "description": "一个基于 Flask 的在线音乐软件",
+      "download": "https://lingtun.com/store/displayer/code/",
+      "files": [
+        "manifest.json",
+        "app.py",
+        "config.py",
+        "extensions.py",
+        "forms.py",
+        "models.py",
+        "requirements.txt",
+        "README.md",
+        "logo.png",
+        "static/css/style.css",
+        "templates/base.html",
+        "templates/collection_detail.html",
+        "templates/collection_form.html",
+        "templates/dashboard.html",
+        "templates/login.html",
+        "templates/play.html",
+        "templates/register.html",
+        "templates/upload.html"
+      ]
+    },
+    {
+      "id": "jetagent",
+      "name": "JetAgent",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/jetagent/logo.png",
+      "download": "https://lingtun.com/store/jetagent/code/",
+      "files": [
+        "manifest.json",
+        "app.js",
+        "index.html",
+        "styles.css",
+        "logo.png"
+      ]
+    },
+    {
+      "id": "pulwork",
+      "name": "Pul工作台",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/pulwork/logo.png",
+      "download": "https://lingtun.com/store/pulwork/code/",
+      "files": [
+        "manifest.json",
+        "app.py",
+        "config.py",
+        "logo.png",
+        "static/scripts.js",
+        "static/styles.css",
+        "templates/admin.html",
+        "templates/chat.html",
+        "templates/document.html",
+        "templates/index.html",
+        "templates/login.html",
+        "templates/register.html"
+      ]
+    },
+    {
+      "id": "sdkdemo",
+      "name": "SDK Demo",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/sdkdemo/logo.png",
+      "download": "https://lingtun.com/store/sdkdemo/code/",
+      "files": [
+        "manifest.json",
+        "app.py",
+        "logo.png"
+      ]
+    },
+    {
+      "id": "引力小车",
+      "name": "引力小车",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/引力小车/logo.png",
+      "download": "https://lingtun.com/store/引力小车/code/",
+      "files": [
+        "manifest.json",
+        "index.html",
+        "Editor.html",
+        "level.gcms",
+        "logo.png",
+        "assets/icon.svg",
+        "assets/logo.svg",
+        "assets/sounds/click.wav",
+        "assets/sounds/click-alt.wav",
+        "assets/sounds/message.wav",
+        "assets/workspace_icon.svg",
+        "assets/workspace_logo.svg"
+      ]
+    },
+    {
+      "id": "智能计算器",
+      "name": "智能计算器",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/智能计算器/logo.png",
+      "download": "https://lingtun.com/store/智能计算器/code/",
+      "files": [
+        "manifest.json",
+        "run_fctz_py.py",
+        "logo.png"
+      ]
+    },
+    {
+      "id": "氧分图表",
+      "name": "氧分图表",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/氧分图表/logo.png",
+      "download": "https://lingtun.com/store/氧分图表/code/",
+      "files": [
+        "manifest.json",
+        "app.py",
+        "requirements.txt",
+        "logo.png",
+        "static/app.js",
+        "static/style.css",
+        "templates/base.html",
+        "templates/chart_detail.html",
+        "templates/chart_edit.html",
+        "templates/chart_form.html",
+        "templates/index.html"
+      ]
+    },
+    {
+      "id": "氧分绘画",
+      "name": "氧分绘画",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/氧分绘画/logo.png",
+      "download": "https://lingtun.com/store/氧分绘画/code/",
+      "files": [
+        "manifest.json",
+        "app.py",
+        "requirements.txt",
+        "logo.png",
+        "static/app.js",
+        "static/icon.svg",
+        "static/styles.css",
+        "templates/index.html"
+      ]
+    },
+    {
+      "id": "氧分驿站",
+      "name": "氧分驿站",
+      "version": "1.0.0",
+      "author": "offmn-user",
+      "icon": "https://lingtun.com/store/氧分驿站/logo.png",
+      "download": "https://lingtun.com/store/氧分驿站/code/",
+      "files": [
+        "manifest.json",
+        "package.json",
+        "package-lock.json",
+        "server.js",
+        "logo.png",
+        "public/app.js",
+        "public/index.html",
+        "public/styles.css"
+      ]
     }
   ]
 }

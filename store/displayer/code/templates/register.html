@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}注册 - DisPlayer{% endblock %}
+{% block content %}
+<section class="card auth-card">
+  <h1>注册</h1>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <label>{{ form.username.label }} {{ form.username(class_="input") }}</label>
+    <label>{{ form.password.label }} {{ form.password(class_="input") }}</label>
+    {{ form.submit(class_="btn") }}
+  </form>
+  <p class="muted">已有账号？<a href="{{ url_for('login') }}">去登录</a></p>
+</section>
+{% endblock %}

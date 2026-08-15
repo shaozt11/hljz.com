@@ -1,0 +1,5 @@
+{
+  "name": "引力小车",
+  "icon": "logo.png",
+  "platforms": ["win32", "linux", "darwin"]
+}

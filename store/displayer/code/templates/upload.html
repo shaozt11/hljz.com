@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}上传 - DisPlayer{% endblock %}
+{% block content %}
+<section class="card auth-card">
+  <h1>上传音乐</h1>
+  <form method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <label>{{ form.title.label }} {{ form.title(class_="input") }}</label>
+    <label>{{ form.artist.label }} {{ form.artist(class_="input") }}</label>
+    <label>{{ form.collection_id.label }} {{ form.collection_id(class_="input") }}</label>
+    <label>{{ form.file.label }} {{ form.file(class_="input") }}</label>
+    {{ form.submit(class_="btn") }}
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>氧分驿站</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="brand-mark"></div>
+        <h1>氧分驿站</h1>
+        <p>极简文件中转。</p>
+      </section>
+
+      <section class="home-actions">
+        <button class="home-btn" data-open="upload" type="button">上传</button>
+        <button class="home-btn" data-open="download" type="button">下载</button>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="modalClose" type="button" aria-label="关闭">×</button>
+        <div class="modal-head">
+          <h2 id="modalTitle"></h2>
+          <p id="modalDesc"></p>
+        </div>
+
+        <form id="uploadForm" class="modal-body modal-form">
+          <label class="field file-field">
+            <span>文件</span>
+            <input id="fileInput" type="file" name="file" required />
+            <div class="file-chip" id="fileChip">选择文件</div>
+          </label>
+
+          <div class="field">
+            <span>留存时间</span>
+            <div class="segmented" id="retentionGroup">
+              <button type="button" class="seg active" data-value="10m">10分钟</button>
+              <button type="button" class="seg" data-value="1h">1小时</button>
+              <button type="button" class="seg" data-value="12h">12小时</button>
+              <button type="button" class="seg" data-value="24h">24小时</button>
+              <button type="button" class="seg" data-value="1d">1天</button>
+              <button type="button" class="seg" data-value="2d">2天</button>
+              <button type="button" class="seg" data-value="3d">3天</button>
+              <button type="button" class="seg" data-value="4d">4天</button>
+              <button type="button" class="seg" data-value="5d">5天</button>
+              <button type="button" class="seg" data-value="6d">6天</button>
+              <button type="button" class="seg" data-value="7d">7天</button>
+            </div>
+            <input type="hidden" name="retention" value="10m" />
+          </div>
+
+          <label class="field">
+            <span>密码</span>
+            <input type="password" name="password" minlength="4" placeholder="至少 4 位" required />
+          </label>
+
+          <button class="primary" type="submit">上传并生成提取码</button>
+        </form>
+
+        <form id="downloadForm" class="modal-body modal-form">
+          <label class="field">
+            <span>提取码</span>
+            <input type="text" name="code" maxlength="8" placeholder="8 位数字" required />
+          </label>
+
+          <label class="field">
+            <span>密码</span>
+            <input type="password" name="password" required />
+          </label>
+
+          <button class="primary" type="submit">验证并下载</button>
+        </form>
+
+        <div id="result" class="result"></div>
+      </section>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

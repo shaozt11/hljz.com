@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+{% block title %}{{ song.title }} - DisPlayer{% endblock %}
+{% block content %}
+<section class="player-shell">
+  <div class="card player-hero player-hero-stack">
+    {% if media_category == 'image' %}
+      <div class="media-stage media-stage-image media-stage-hero" data-image-stage>
+        <div class="media-stage-header">
+          <div>
+            <div class="section-kicker">图片预览</div>
+            <h2>{{ song.title }}</h2>
+          </div>
+          <div class="media-zoom-toolbar">
+            <button class="audio-btn audio-btn-ghost" type="button" data-zoom-out aria-label="缩小图片">-</button>
+            <button class="audio-btn audio-btn-ghost" type="button" data-zoom-reset aria-label="重置缩放">1:1</button>
+            <button class="audio-btn audio-btn-ghost" type="button" data-zoom-in aria-label="放大图片">+</button>
+          </div>
+        </div>
+        <div class="media-viewport media-viewport-hero">
+          <img
+            class="media-image"
+            data-zoom-image
+            src="{{ url_for('media', song_id=song.id) }}"
+            alt="{{ song.title }}"
+          >
+        </div>
+      </div>
+    {% elif media_category == 'video' %}
+      <div class="media-stage media-stage-video media-stage-hero" data-video-stage>
+        <div class="media-stage-header">
+          <div>
+            <div class="section-kicker">视频播放</div>
+            <h2>{{ song.title }}</h2>
+          </div>
+          <span class="tag tag-ghost">VIDEO</span>
+        </div>
+        <div class="media-viewport media-viewport-hero media-viewport-video">
+          <video id="video-element" class="media-video" preload="metadata" playsinline>
+            <source src="{{ url_for('media', song_id=song.id) }}" type="{{ song.mime_type or 'video/mp4' }}">
+            你的浏览器不支持视频播放。
+          </video>
+        </div>
+        <div class="media-controls" data-video-player>
+          <button class="audio-btn" type="button" data-play-toggle aria-label="播放或暂停">
+            <span class="audio-icon audio-icon-play" data-play-icon></span>
+          </button>
+          <div class="time-group media-time-group">
+            <span class="time-label" data-current-time>0:00</span>
+            <div class="seek-wrap">
+              <input class="seek-bar" type="range" min="0" max="1000" value="0" step="1" data-seek aria-label="播放进度">
+            </div>
+            <span class="time-label" data-duration>0:00</span>
+          </div>
+          <div class="volume-group">
+            <button class="audio-btn audio-btn-ghost" type="button" data-mute-toggle aria-label="静音或取消静音">
+              <span class="audio-icon audio-icon-volume" data-volume-icon></span>
+            </button>
+            <input class="volume-bar" type="range" min="0" max="100" value="100" step="1" data-volume aria-label="音量">
+          </div>
+          <button class="audio-btn audio-btn-ghost" type="button" data-fullscreen-toggle aria-label="全屏">
+            <span class="icon-fullscreen" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    {% else %}
+      <div class="media-stage media-stage-audio media-stage-hero">
+        <div class="media-stage-header">
+          <div>
+            <div class="section-kicker">音频播放</div>
+            <h2>{{ song.title }}</h2>
+          </div>
+          <span class="tag tag-ghost">AUDIO</span>
+        </div>
+        <div class="audio-card audio-card-hero">
+          <audio id="audio-element" preload="metadata">
+            <source src="{{ url_for('media', song_id=song.id) }}" type="{{ song.mime_type or 'audio/mpeg' }}">
+            你的浏览器不支持音频播放。
+          </audio>
+          <div class="media-controls" data-audio-player>
+            <button class="audio-btn" type="button" data-play-toggle aria-label="播放或暂停">
+              <span class="audio-icon audio-icon-play" data-play-icon></span>
+            </button>
+            <div class="time-group media-time-group">
+              <span class="time-label" data-current-time>0:00</span>
+              <div class="seek-wrap">
+                <input class="seek-bar" type="range" min="0" max="1000" value="0" step="1" data-seek aria-label="播放进度">
+              </div>
+              <span class="time-label" data-duration>0:00</span>
+            </div>
+            <div class="volume-group">
+              <button class="audio-btn audio-btn-ghost" type="button" data-mute-toggle aria-label="静音或取消静音">
+                <span class="audio-icon audio-icon-volume" data-volume-icon></span>
+              </button>
+              <input class="volume-bar" type="range" min="0" max="100" value="100" step="1" data-volume aria-label="音量">
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="player-main player-main-below">
+      <div class="meta-row">
+        <span class="tag">正在播放</span>
+        <span class="tag tag-ghost">{{ song.collection.name if song.collection else '未归类' }}</span>
+        <span class="tag tag-ghost">{{ media_category | upper }}</span>
+      </div>
+
+      <h1 class="player-title">{{ song.title }}</h1>
+      <p class="player-artist">{{ song.artist or '未知作者' }}</p>
+
+      <div class="song-stats">
+        <div>
+          <span class="stat-label">文件名</span>
+          <span class="stat-value">{{ song.original_filename }}</span>
+        </div>
+        <div>
+          <span class="stat-label">格式</span>
+          <span class="stat-value">{{ (song.filename.rsplit('.', 1)[1] if '.' in song.filename else 'unknown') | upper }}</span>
+        </div>
+        <div>
+          <span class="stat-label">上传时间</span>
+          <span class="stat-value">{{ song.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">返回首页</a>
+        {% if song.collection %}
+          <a class="btn btn-secondary" href="{{ url_for('collection_detail', collection_id=song.collection.id) }}">查看合集</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="player-grid">
+    <section class="card panel-block">
+      <div class="section-head">
+        <h2>媒体信息</h2>
+      </div>
+      <div class="info-list">
+        <div class="info-item">
+          <span class="info-key">标题</span>
+          <span class="info-val">{{ song.title }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-key">作者</span>
+          <span class="info-val">{{ song.artist or '未知作者' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-key">合集</span>
+          <span class="info-val">{{ song.collection.name if song.collection else '未归类' }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card panel-block">
+      <div class="section-head">
+        <h2>相关条目</h2>
+        <span class="muted">同合集优先</span>
+      </div>
+
+      {% if related_songs %}
+        <div class="track-list">
+          {% for item in related_songs %}
+            <a class="track-item" href="{{ url_for('play_song', song_id=item.id) }}">
+              <div class="track-icon"></div>
+              <div class="track-copy">
+                <strong>{{ item.title }}</strong>
+                <span>{{ item.artist or '未知作者' }}</span>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="muted">当前没有更多相关条目。</p>
+      {% endif %}
+    </section>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const mediaType = {{ media_category|tojson }};
+    const isVideo = mediaType === 'video';
+    const isAudio = mediaType === 'audio';
+    const audio = document.getElementById('audio-element');
+    const video = document.getElementById('video-element');
+    const player = audio || video;
+    const playToggle = document.querySelector('[data-play-toggle]');
+    const playIcon = document.querySelector('[data-play-icon]');
+    const muteToggle = document.querySelector('[data-mute-toggle]');
+    const volumeIcon = document.querySelector('[data-volume-icon]');
+    const seek = document.querySelector('[data-seek]');
+    const volume = document.querySelector('[data-volume]');
+    const currentTime = document.querySelector('[data-current-time]');
+    const duration = document.querySelector('[data-duration]');
+    const fullscreenToggle = document.querySelector('[data-fullscreen-toggle]');
+    const volumeStorageKey = 'displayer-player-volume';
+    const muteStorageKey = 'displayer-player-muted';
+
+    if (player && playToggle && seek && volume && currentTime && duration) {
+      const formatTime = (seconds) => {
+        if (!isFinite(seconds) || seconds < 0) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${mins}:${secs}`;
+      };
+
+      const readSetting = (key) => {
+        try {
+          return window.localStorage.getItem(key);
+        } catch (error) {
+          return null;
+        }
+      };
+
+      const writeSetting = (key, value) => {
+        try {
+          window.localStorage.setItem(key, value);
+        } catch (error) {}
+      };
+
+      const updatePlayState = () => {
+        const isPlaying = !player.paused;
+        playIcon.classList.toggle('audio-icon-play', !isPlaying);
+        playIcon.classList.toggle('audio-icon-pause', isPlaying);
+        playToggle.setAttribute('aria-label', isPlaying ? '暂停' : '播放');
+      };
+
+      const updateVolumeState = () => {
+        const muted = player.muted || player.volume === 0;
+        volumeIcon.classList.toggle('audio-icon-volume', !muted);
+        volumeIcon.classList.toggle('audio-icon-muted', muted);
+        muteToggle.setAttribute('aria-label', muted ? '取消静音' : '静音');
+        volume.value = Math.round(player.volume * 100);
+      };
+
+      const loadSavedVolume = () => {
+        const savedVolumeRaw = readSetting(volumeStorageKey);
+        const savedVolume = savedVolumeRaw === null ? 1 : Number(savedVolumeRaw);
+        const savedMuted = readSetting(muteStorageKey) === '1';
+        const volumeValue = Number.isFinite(savedVolume) ? Math.min(1, Math.max(0, savedVolume)) : 1;
+        player.volume = volumeValue;
+        player.muted = savedMuted;
+        volume.value = Math.round(volumeValue * 100);
+      };
+
+      const saveVolume = () => {
+        writeSetting(volumeStorageKey, String(player.volume));
+        writeSetting(muteStorageKey, player.muted ? '1' : '0');
+      };
+
+      const updateProgress = () => {
+        if (player.duration) {
+          seek.value = Math.round((player.currentTime / player.duration) * 1000);
+          currentTime.textContent = formatTime(player.currentTime);
+          duration.textContent = formatTime(player.duration);
+        } else {
+          currentTime.textContent = '0:00';
+          duration.textContent = '0:00';
+        }
+      };
+
+      playToggle.addEventListener('click', async () => {
+        if (player.paused) {
+          try {
+            await player.play();
+          } catch (error) {
+            return;
+          }
+        } else {
+          player.pause();
+        }
+        updatePlayState();
+      });
+
+      muteToggle.addEventListener('click', () => {
+        player.muted = !player.muted;
+        saveVolume();
+        updateVolumeState();
+      });
+
+      seek.addEventListener('input', () => {
+        if (player.duration) {
+          player.currentTime = (seek.value / 1000) * player.duration;
+        }
+        updateProgress();
+      });
+
+      volume.addEventListener('input', () => {
+        player.muted = false;
+        player.volume = volume.value / 100;
+        saveVolume();
+        updateVolumeState();
+      });
+
+      player.addEventListener('timeupdate', updateProgress);
+      player.addEventListener('loadedmetadata', updateProgress);
+      player.addEventListener('play', updatePlayState);
+      player.addEventListener('pause', updatePlayState);
+      player.addEventListener('volumechange', updateVolumeState);
+      player.addEventListener('ended', updatePlayState);
+
+      if (isVideo && fullscreenToggle) {
+        fullscreenToggle.addEventListener('click', async () => {
+          const host = document.querySelector('[data-video-stage]');
+          if (!host) return;
+          try {
+            if (document.fullscreenElement) {
+              await document.exitFullscreen();
+            } else if (host.requestFullscreen) {
+              await host.requestFullscreen();
+            }
+          } catch (error) {}
+        });
+      }
+
+      loadSavedVolume();
+      saveVolume();
+      updatePlayState();
+      updateVolumeState();
+      updateProgress();
+    }
+
+    const imageStage = document.querySelector('[data-image-stage]');
+    const image = document.querySelector('[data-zoom-image]');
+    const zoomIn = document.querySelector('[data-zoom-in]');
+    const zoomOut = document.querySelector('[data-zoom-out]');
+    const zoomReset = document.querySelector('[data-zoom-reset]');
+
+    if (imageStage && image && zoomIn && zoomOut && zoomReset) {
+      let scale = 1;
+      const minScale = 0.5;
+      const maxScale = 4;
+      const step = 0.25;
+
+      const applyScale = () => {
+        image.style.transform = `scale(${scale})`;
+        imageStage.dataset.scale = scale.toFixed(2);
+      };
+
+      zoomIn.addEventListener('click', () => {
+        scale = Math.min(maxScale, scale + step);
+        applyScale();
+      });
+
+      zoomOut.addEventListener('click', () => {
+        scale = Math.max(minScale, scale - step);
+        applyScale();
+      });
+
+      zoomReset.addEventListener('click', () => {
+        scale = 1;
+        applyScale();
+      });
+
+      imageStage.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        scale = event.deltaY < 0 ? Math.min(maxScale, scale + step) : Math.max(minScale, scale - step);
+        applyScale();
+      }, { passive: false });
+
+      applyScale();
+    }
+  })();
+</script>
+{% endblock %}

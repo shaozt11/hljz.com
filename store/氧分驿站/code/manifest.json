@@ -1,0 +1,8 @@
+{
+  "name": "氧分驿站",
+  "icon": "logo.png",
+  "runtime": "node",
+  "port": 3000,
+  "start_path": "/",
+  "platforms": ["win32", "linux", "darwin"]
+}

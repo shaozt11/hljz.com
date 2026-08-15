@@ -1,0 +1,5 @@
+{
+  "name": "JetAgent",
+  "icon": "logo.png",
+  "platforms": ["win32", "linux", "darwin"]
+}

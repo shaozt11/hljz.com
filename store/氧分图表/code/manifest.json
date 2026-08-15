@@ -1,0 +1,8 @@
+{
+  "name": "氧分图表",
+  "icon": "logo.png",
+  "runtime": "flask",
+  "port": 6305,
+  "start_path": "/",
+  "platforms": ["win32", "linux", "darwin"]
+}

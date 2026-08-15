@@ -1,0 +1,8 @@
+{
+  "name": "DisPlayer",
+  "icon": "logo.png",
+  "runtime": "flask",
+  "port": 6302,
+  "start_path": "",
+  "platforms": ["win32", "linux", "darwin"]
+}

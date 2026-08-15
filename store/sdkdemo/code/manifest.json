@@ -1,0 +1,8 @@
+{
+  "name": "SDK Demo",
+  "icon": "/img/logo.png",
+  "runtime": "flask",
+  "port": 5010,
+  "start_path": "/",
+  "platforms": ["win32", "linux", "darwin"]
+}

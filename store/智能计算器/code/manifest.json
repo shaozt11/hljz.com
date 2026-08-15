@@ -1,0 +1,10 @@
+{
+  "name": "智能计算器",
+  "icon": "logo.png",
+  "port": null,
+  "platforms": ["win32"],
+  "terminal": {
+    "input": "terminal",
+    "echoInput": true
+  }
+}

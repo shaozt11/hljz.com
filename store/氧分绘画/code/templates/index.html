@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Draw</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="panel toolbar">
+      <div class="brand">
+        <div class="logo">◌</div>
+        <div>
+          <h1>Draw</h1>
+          <p>简洁画图</p>
+        </div>
+      </div>
+
+      <div class="tool-row">
+        <label>颜色 <input id="color" type="color" value="#1f2937"></label>
+        <label>粗细 <input id="size" type="range" min="1" max="40" value="8"></label>
+        <button id="penBtn" class="active">画笔</button>
+        <button id="eraserBtn">橡皮</button>
+        <button id="undoBtn">撤销</button>
+        <button id="clearBtn">清空</button>
+        <button id="saveBtn" class="primary">保存</button>
+        <button id="syncBtn">断点协同</button>
+        <span id="syncStatus" class="sync-status">未连接</span>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="panel canvas-wrap">
+        <canvas id="canvas"></canvas>
+        <div class="hint">拖动开始绘制，保存会写入 `result/`。</div>
+      </div>
+
+      <aside class="panel gallery">
+        <div class="gallery-head">
+          <h2>最近保存</h2>
+          <button id="refreshBtn">刷新</button>
+        </div>
+        <div id="fileList" class="file-list"></div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    window.ROXET_AVAILABLE = !!window.Roxet;
+  </script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "氧分绘画",
+  "icon": "logo.png",
+  "runtime": "flask",
+  "port": 6303,
+  "start_path": "",
+  "platforms": ["win32", "linux", "darwin"]
+}

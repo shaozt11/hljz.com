@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}首页 - DisPlayer{% endblock %}
+{% block content %}
+<section class="hero card">
+  <h1>音乐库</h1>
+  <p>支持上传常见音频格式，按“音乐合集”分类管理并在线播放。</p>
+  <div class="actions">
+    <a class="btn" href="{{ url_for('upload') }}">上传音乐</a>
+    <a class="btn btn-secondary" href="{{ url_for('new_collection') }}">新建合集</a>
+  </div>
+</section>
+
+<section class="grid">
+  <div class="card">
+    <h2>音乐合集</h2>
+    {% if collections %}
+      <div class="list">
+        {% for collection in collections %}
+          <div class="list-item collection-item">
+            <a class="collection-thumb collection-thumb--sm" href="{{ url_for('collection_detail', collection_id=collection.id) }}">
+              {% if collection.cover_filename %}
+                <img class="collection-thumb-image" src="{{ url_for('collection_cover', collection_id=collection.id) }}" alt="{{ collection.name }} 封面">
+              {% else %}
+                <span class="collection-thumb-placeholder"></span>
+              {% endif %}
+            </a>
+            <div class="collection-copy">
+              <strong><a href="{{ url_for('collection_detail', collection_id=collection.id) }}">{{ collection.name }}</a></strong>
+              <div class="muted">{{ collection.description or '暂无简介' }}</div>
+            </div>
+            <form method="post" action="{{ url_for('delete_collection', collection_id=collection.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="link-btn" type="submit">删除</button>
+            </form>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="muted">还没有合集，先新建一个。</p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>全部歌曲</h2>
+    {% if songs %}
+      <div class="list">
+        {% for song in songs %}
+          <div class="list-item">
+            <div>
+              <strong>{{ song.title }}</strong>
+              <div class="muted">{{ song.artist or '未知歌手' }} · {{ song.collection.name if song.collection else '未归类' }}</div>
+            </div>
+            <div class="inline-actions">
+              <a href="{{ url_for('play_song', song_id=song.id) }}">播放</a>
+              <form method="post" action="{{ url_for('delete_song', song_id=song.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="link-btn" type="submit">删除</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="muted">还没有上传歌曲。</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

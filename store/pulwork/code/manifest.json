@@ -1,0 +1,8 @@
+{
+  "name": "Pul工作台",
+  "icon": "logo.png",
+  "runtime": "flask",
+  "port": 5001,
+  "start_path": "/login",
+  "platforms": ["win32", "linux", "darwin"]
+}

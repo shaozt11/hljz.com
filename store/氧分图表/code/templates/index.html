@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="hero">
+    <div>
+      <h1>图表面板</h1>
+      <p>支持表格、柱状图、饼状图、频数统计图、折线图和随时间播放的动态图表。</p>
+    </div>
+  </section>
+
+  {% if charts %}
+    <section class="grid">
+      {% for chart in charts %}
+        <a class="card" href="{{ url_for('chart_edit', chart_id=chart.id) }}">
+          <div class="card-head">
+            <div>
+              <h2>{{ chart.title }}</h2>
+              <span class="badge">{{ chart_types[chart.type] }}</span>
+            </div>
+          </div>
+          <div class="card-body">
+            {% if chart.type == 'table' %}
+              <div class="table-preview">
+                <table>
+                  <thead>
+                    <tr>
+                      {% for head in chart.table.headers %}
+                        <th>{{ head }}</th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for row in chart.table.rows[:3] %}
+                      <tr>
+                        {% for cell in row %}
+                          <td>{{ cell }}</td>
+                        {% endfor %}
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            {% else %}
+              {% if chart.type == 'frequency' %}
+                {% set chart_labels = chart['frequency']['labels'] %}
+                {% set chart_values = chart['frequency']['values'] %}
+              {% elif chart.type == 'dynamic' %}
+                {% set chart_labels = chart['labels'] %}
+                {% set chart_values = chart['frames'][0]['values'] if chart['frames'] else [] %}
+              {% else %}
+                {% set chart_labels = chart['labels'] %}
+                {% set chart_values = chart['values'] %}
+              {% endif %}
+              <div
+                class="mini-chart"
+                data-chart-type="{{ chart.type }}"
+                data-labels='{{ chart_labels | tojson }}'
+                data-values='{{ chart_values | tojson }}'
+                data-frames='{{ chart.frames | default([]) | tojson }}'
+                data-interval-ms="{{ chart.interval_ms or 1000 }}"
+              ></div>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </section>
+  {% else %}
+    <section class="empty-state">
+      <h2>还没有图表</h2>
+      <p>点击右上角“+”创建第一个图表。</p>
+    </section>
+  {% endif %}
+{% endblock %}

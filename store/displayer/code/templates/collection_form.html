@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}新建合集 - DisPlayer{% endblock %}
+{% block content %}
+<section class="card auth-card">
+  <h1>新建音乐合集</h1>
+  <form method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <label>{{ form.name.label }} {{ form.name(class_="input") }}</label>
+    <label>{{ form.description.label }} {{ form.description(class_="input textarea") }}</label>
+    <label>{{ form.cover.label }} {{ form.cover(class_="input") }}</label>
+    <p class="muted helper-text">建议上传方形图片，支持 png、jpg、jpeg、webp、gif。</p>
+    {{ form.submit(class_="btn") }}
+  </form>
+</section>
+{% endblock %}

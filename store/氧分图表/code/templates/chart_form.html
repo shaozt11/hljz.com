@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="panel">
+    <h1>创建图表</h1>
+    <form method="post" class="form" id="chart-form">
+      <label>
+        标题
+        <input name="title" value="{{ form.title }}" placeholder="例如：每月销售额" required />
+      </label>
+
+      <label>
+        图表类型
+        <select name="chart_type" id="chart-type">
+          {% for key, label in chart_types.items() %}
+            <option value="{{ key }}" {% if key == default_type %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label id="bins-wrap">
+        分组数
+        <input name="bins" type="number" min="2" value="{{ form.bins }}" />
+      </label>
+
+      <label>
+        数据
+        <textarea name="content" id="content-input" rows="12" placeholder="A,10&#10;B,20&#10;C,14" required>{{ form.content }}</textarea>
+      </label>
+
+      <label>
+        备注
+        <textarea name="notes" rows="4" placeholder="可选说明">{{ form.notes }}</textarea>
+      </label>
+
+      <div class="hint" id="format-hint"></div>
+      <button class="primary" type="submit">保存</button>
+    </form>
+  </section>
+{% endblock %}

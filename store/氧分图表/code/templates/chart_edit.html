@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="editor-shell" data-chart-id="{{ chart.id }}" data-chart-type="{{ chart.type }}">
+    <aside class="editor-sidebar">
+      <div class="panel">
+        <h1 id="chart-title">{{ chart.title }}</h1>
+        <div class="badge" id="chart-badge">{{ chart_types[chart.type] }}</div>
+        <p class="hint">可以在表格里编辑数据，预览会自动刷新。</p>
+      </div>
+
+      <div class="panel">
+        <label>
+          标题
+          <input id="title-input" value="{{ chart.title }}" />
+        </label>
+
+        <label>
+          图表类型
+          <select id="type-input">
+            {% for key, label in chart_types.items() %}
+              <option value="{{ key }}" {% if key == chart.type %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label>
+          备注
+          <textarea id="notes-input" rows="5">{{ chart.notes }}</textarea>
+        </label>
+
+        <label id="bins-wrap" {% if chart.type != 'frequency' %}style="display:none"{% endif %}>
+          分组数
+          <input id="bins-input" type="number" min="2" value="{{ chart.bins or 8 }}" />
+        </label>
+
+        <div id="dynamic-tools" class="dynamic-tools" {% if chart.type != 'dynamic' %}style="display:none"{% endif %}>
+          <label>
+            每次变化间隔（毫秒）
+            <input id="interval-input" type="number" min="200" max="10000" step="100" value="{{ chart.interval_ms or 1000 }}" />
+          </label>
+          <button class="secondary" id="export-video-btn" type="button">合成为视频</button>
+        </div>
+
+        <div class="editor-actions">
+          <button class="primary" id="save-btn" type="button">保存</button>
+          <button class="secondary" id="undo-btn" type="button">撤销</button>
+          <button class="secondary" id="redo-btn" type="button">重做</button>
+        </div>
+      </div>
+
+      <div class="panel" {% if chart.type == 'table' %}style="display:none"{% endif %}>
+        <div class="toolbar">
+          <button class="secondary" id="export-json-btn" type="button">导出 JSON</button>
+          <button class="secondary" id="export-csv-btn" type="button">导出 CSV</button>
+          <label class="file-btn">
+            导入 JSON
+            <input id="import-input" type="file" accept="application/json" />
+          </label>
+        </div>
+        <div class="hint" id="status-text">自动保存已开启</div>
+      </div>
+
+      <div class="panel">
+        <button class="section-toggle" id="version-toggle" type="button">历史版本</button>
+        <div id="version-list" class="version-list is-collapsed"></div>
+      </div>
+    </aside>
+
+    <section class="editor-main">
+      <div class="panel data-panel">
+        <div class="preview-head">
+          <h2>{% if chart.type == 'table' %}电子表格{% else %}数据表{% endif %}</h2>
+          <span class="hint">{% if chart.type == 'dynamic' %}首列是时间，后面每列是项目{% else %}直接编辑单元格{% endif %}</span>
+        </div>
+        <div id="data-editor"></div>
+      </div>
+
+      {% if chart.type != 'table' %}
+        <div class="panel preview-panel">
+          <div class="preview-head">
+            <h2>实时预览</h2>
+            <span class="hint">修改后自动刷新</span>
+          </div>
+          <div
+            id="preview-chart"
+            class="chart-box"
+            data-chart-type="{{ chart.type }}"
+            data-labels='{{ chart_labels | tojson }}'
+            data-values='{{ chart_values | tojson }}'
+            data-frames='{{ chart.frames | default([]) | tojson }}'
+            data-interval-ms="{{ chart.interval_ms or 1000 }}"
+          ></div>
+        </div>
+      {% endif %}
+    </section>
+  </section>
+
+  <script id="chart-bootstrap" type="application/json">{{ chart | tojson }}</script>
+{% endblock %}

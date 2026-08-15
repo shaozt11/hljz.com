@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员面板 - 工作台</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* 管理后台页面专用：覆盖 .container 宽度 */
+        .container.admin-container {
+            max-width: 1100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container admin-container">
+        <div class="admin-panel">
+            <div class="admin-header">
+                <h1>管理员控制面板</h1>
+                <div class="admin-user-info">
+                    <p>当前管理员: <span id="admin-username"></span></p>
+                    <div class="admin-header-buttons">
+                        <button onclick="refreshData()" class="refresh-btn">刷新数据</button>
+                        <button onclick="window.location.href='/'" class="management-btn">返回工作台</button>
+                        <button onclick="logout()" class="logout-btn">退出登录</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <!-- 统计卡片 -->
+                <div class="stats-section">
+                    <h2>📊 系统概览</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>总用户数</h3>
+                            <p id="total-users">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 添加用户 -->
+                <div class="management-section" style="margin-bottom: 30px;">
+                    <h3>➕ 添加新用户</h3>
+                    <form id="add-user-form">
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
+                            <div class="form-group" style="flex: 1; min-width: 150px;">
+                                <label>用户名:</label>
+                                <input type="text" id="new-username" required minlength="3" maxlength="20"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group" style="flex: 1; min-width: 150px;">
+                                <label>密码:</label>
+                                <input type="password" id="new-password" required minlength="6" class="form-control">
+                            </div>
+                            <div class="form-group" style="flex: 1; min-width: 150px;">
+                                <label>邮箱:</label>
+                                <input type="email" id="new-email" required class="form-control">
+                            </div>
+                            <div class="form-group" style="flex-shrink: 0;">
+                                <button type="submit" class="btn btn-primary">创建用户</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 用户管理列表 -->
+                <div class="users-section">
+                    <h2>👥 用户管理</h2>
+                    <div class="search-bar">
+                        <input type="text" id="user-search" placeholder="搜索用户名..." oninput="filterUsers()">
+                    </div>
+                    <div class="users-table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>用户名</th>
+                                    <th>邮箱</th>
+                                    <th>注册时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- 用户数据将在这里动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>由PulTorch & UildStudio提供技术支持</p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+
+</html>
